@@ -1,0 +1,515 @@
+{
+  "expand": "renderedFields,names,schema,operations,editmeta,changelog,versionedRepresentations,customfield_11003.properties",
+  "id": "137901",
+  "self": "https://mercari.atlassian.net/rest/api/2/issue/137901",
+  "key": "MJP-27285",
+  "fields": {
+    "statuscategorychangedate": "2019-06-20T11:52:56.276+0900",
+    "parent": {
+      "id": "122421",
+      "key": "MJP-22181",
+      "self": "https://mercari.atlassian.net/rest/api/2/issue/122421",
+      "fields": {
+        "summary": "[iOS]Top component (with CRM)",
+        "status": {
+          "self": "https://mercari.atlassian.net/rest/api/2/status/10000",
+          "description": "",
+          "iconUrl": "https://mercari.atlassian.net/",
+          "name": "To Do",
+          "id": "10000",
+          "statusCategory": {
+            "self": "https://mercari.atlassian.net/rest/api/2/statuscategory/2",
+            "id": 2,
+            "key": "new",
+            "colorName": "blue-gray",
+            "name": "To Do"
+          }
+        },
+        "priority": {
+          "self": "https://mercari.atlassian.net/rest/api/2/priority/3",
+          "iconUrl": "https://mercari.atlassian.net/secure/attachment/33136/P2-3B963B.svg",
+          "name": "Normal",
+          "id": "3"
+        },
+        "issuetype": {
+          "self": "https://mercari.atlassian.net/rest/api/2/issuetype/10000",
+          "id": "10000",
+          "description": "A user story. Created by JIRA Software - do not edit or delete.",
+          "iconUrl": "https://mercari.atlassian.net/secure/viewavatar?size=medium&avatarId=10315&avatarType=issuetype",
+          "name": "Story",
+          "subtask": false,
+          "avatarId": 10315
+        }
+      }
+    },
+    "customfield_11040": null,
+    "customfield_11041": null,
+    "customfield_11043": null,
+    "customfield_11044": null,
+    "customfield_11045": null,
+    "fixVersions": [],
+    "customfield_11046": null,
+    "resolution": null,
+    "customfield_11048": null,
+    "customfield_11049": null,
+    "customfield_10500": null,
+    "customfield_11039": null,
+    "customfield_10900": null,
+    "lastViewed": "2019-08-10T11:17:58.576+0900",
+    "customfield_11030": null,
+    "customfield_11031": null,
+    "customfield_11032": null,
+    "customfield_11033": null,
+    "customfield_11034": null,
+    "customfield_11035": null,
+    "priority": {
+      "self": "https://mercari.atlassian.net/rest/api/2/priority/3",
+      "iconUrl": "https://mercari.atlassian.net/secure/attachment/33136/P2-3B963B.svg",
+      "name": "Normal",
+      "id": "3"
+    },
+    "customfield_10100": null,
+    "customfield_11036": null,
+    "customfield_11037": null,
+    "customfield_11038": null,
+    "labels": [
+      "CRM",
+      "SIC"
+    ],
+    "aggregatetimeoriginalestimate": null,
+    "timeestimate": null,
+    "issuelinks": [],
+    "assignee": {
+      "self": "https://mercari.atlassian.net/rest/api/2/user?accountId=5af509b1a73f7a591346357c",
+      "name": "hirakiuc",
+      "key": "hirakiuc",
+      "accountId": "5af509b1a73f7a591346357c",
+      "emailAddress": "hirakiuc@mercari.com",
+      "avatarUrls": {
+        "48x48": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5af509b1a73f7a591346357c/e93ca59e-33f0-43a5-8cfa-20e6e62da584/128?size=48&s=48",
+        "24x24": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5af509b1a73f7a591346357c/e93ca59e-33f0-43a5-8cfa-20e6e62da584/128?size=24&s=24",
+        "16x16": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5af509b1a73f7a591346357c/e93ca59e-33f0-43a5-8cfa-20e6e62da584/128?size=16&s=16",
+        "32x32": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5af509b1a73f7a591346357c/e93ca59e-33f0-43a5-8cfa-20e6e62da584/128?size=32&s=32"
+      },
+      "displayName": "Daisuke HIRAKIUCHI",
+      "active": true,
+      "timeZone": "Asia/Tokyo",
+      "accountType": "atlassian"
+    },
+    "status": {
+      "self": "https://mercari.atlassian.net/rest/api/2/status/10700",
+      "description": "",
+      "iconUrl": "https://mercari.atlassian.net/images/icons/statuses/generic.png",
+      "name": "Developing",
+      "id": "10700",
+      "statusCategory": {
+        "self": "https://mercari.atlassian.net/rest/api/2/statuscategory/4",
+        "id": 4,
+        "key": "indeterminate",
+        "colorName": "yellow",
+        "name": "In Progress"
+      }
+    },
+    "components": [],
+    "customfield_10600": null,
+    "aggregatetimeestimate": null,
+    "creator": {
+      "self": "https://mercari.atlassian.net/rest/api/2/user?accountId=5b4725dace51f259edf21b2b",
+      "name": "y.hishii",
+      "key": "y.hishii",
+      "accountId": "5b4725dace51f259edf21b2b",
+      "avatarUrls": {
+        "48x48": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5b4725dace51f259edf21b2b/04512a5b-3fae-4b28-ba0c-b4040aba55b6/128?size=48&s=48",
+        "24x24": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5b4725dace51f259edf21b2b/04512a5b-3fae-4b28-ba0c-b4040aba55b6/128?size=24&s=24",
+        "16x16": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5b4725dace51f259edf21b2b/04512a5b-3fae-4b28-ba0c-b4040aba55b6/128?size=16&s=16",
+        "32x32": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5b4725dace51f259edf21b2b/04512a5b-3fae-4b28-ba0c-b4040aba55b6/128?size=32&s=32"
+      },
+      "displayName": "Yasuo HISHII",
+      "active": true,
+      "timeZone": "Asia/Tokyo",
+      "accountType": "atlassian"
+    },
+    "customfield_11092": null,
+    "customfield_11093": null,
+    "customfield_11094": null,
+    "subtasks": [],
+    "customfield_11095": null,
+    "customfield_11096": null,
+    "reporter": {
+      "self": "https://mercari.atlassian.net/rest/api/2/user?accountId=5b4725dace51f259edf21b2b",
+      "name": "y.hishii",
+      "key": "y.hishii",
+      "accountId": "5b4725dace51f259edf21b2b",
+      "avatarUrls": {
+        "48x48": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5b4725dace51f259edf21b2b/04512a5b-3fae-4b28-ba0c-b4040aba55b6/128?size=48&s=48",
+        "24x24": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5b4725dace51f259edf21b2b/04512a5b-3fae-4b28-ba0c-b4040aba55b6/128?size=24&s=24",
+        "16x16": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5b4725dace51f259edf21b2b/04512a5b-3fae-4b28-ba0c-b4040aba55b6/128?size=16&s=16",
+        "32x32": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5b4725dace51f259edf21b2b/04512a5b-3fae-4b28-ba0c-b4040aba55b6/128?size=32&s=32"
+      },
+      "displayName": "Yasuo HISHII",
+      "active": true,
+      "timeZone": "Asia/Tokyo",
+      "accountType": "atlassian"
+    },
+    "aggregateprogress": {
+      "progress": 0,
+      "total": 0
+    },
+    "customfield_11008": null,
+    "progress": {
+      "progress": 0,
+      "total": 0
+    },
+    "votes": {
+      "self": "https://mercari.atlassian.net/rest/api/2/issue/MJP-27285/votes",
+      "votes": 0,
+      "hasVoted": false
+    },
+    "worklog": {
+      "startAt": 0,
+      "maxResults": 20,
+      "total": 0,
+      "worklogs": []
+    },
+    "issuetype": {
+      "self": "https://mercari.atlassian.net/rest/api/2/issuetype/10201",
+      "id": "10201",
+      "description": "",
+      "iconUrl": "https://mercari.atlassian.net/secure/viewavatar?size=medium&avatarId=10316&avatarType=issuetype",
+      "name": "Backend Sub-task",
+      "subtask": true,
+      "avatarId": 10316
+    },
+    "customfield_11083": null,
+    "timespent": null,
+    "customfield_11084": null,
+    "customfield_11085": null,
+    "customfield_11086": null,
+    "customfield_11087": null,
+    "project": {
+      "self": "https://mercari.atlassian.net/rest/api/2/project/11400",
+      "id": "11400",
+      "key": "MJP",
+      "name": "Mercari JP",
+      "projectTypeKey": "software",
+      "simplified": false,
+      "avatarUrls": {
+        "48x48": "https://mercari.atlassian.net/secure/projectavatar?pid=11400&avatarId=13176",
+        "24x24": "https://mercari.atlassian.net/secure/projectavatar?size=small&s=small&pid=11400&avatarId=13176",
+        "16x16": "https://mercari.atlassian.net/secure/projectavatar?size=xsmall&s=xsmall&pid=11400&avatarId=13176",
+        "32x32": "https://mercari.atlassian.net/secure/projectavatar?size=medium&s=medium&pid=11400&avatarId=13176"
+      },
+      "projectCategory": {
+        "self": "https://mercari.atlassian.net/rest/api/2/projectCategory/10002",
+        "id": "10002",
+        "description": "Projects related wot work for Japan Market",
+        "name": "Mercari JP"
+      }
+    },
+    "customfield_11088": null,
+    "aggregatetimespent": null,
+    "customfield_11003": null,
+    "customfield_10700": null,
+    "customfield_10701": null,
+    "resolutiondate": null,
+    "workratio": -1,
+    "watches": {
+      "self": "https://mercari.atlassian.net/rest/api/2/issue/MJP-27285/watchers",
+      "watchCount": 2,
+      "isWatching": true
+    },
+    "customfield_11070": null,
+    "customfield_11071": null,
+    "customfield_11072": null,
+    "created": "2019-06-13T11:06:55.966+0900",
+    "customfield_11073": null,
+    "customfield_11074": null,
+    "customfield_11075": null,
+    "customfield_11110": null,
+    "customfield_11111": null,
+    "customfield_10300": {
+      "hasEpicLinkFieldDependency": false,
+      "showField": false,
+      "nonEditableReason": {
+        "reason": "SUBTASK_LINK_SHOULD_BE_USED",
+        "message": "To set the parent for a sub-task, use the sub-task link."
+      }
+    },
+    "customfield_10026": null,
+    "customfield_11105": null,
+    "customfield_11106": null,
+    "customfield_11107": null,
+    "customfield_11108": null,
+    "customfield_11109": null,
+    "updated": "2019-07-15T17:36:22.301+0900",
+    "customfield_11060": null,
+    "customfield_11061": null,
+    "timeoriginalestimate": null,
+    "customfield_11063": null,
+    "customfield_11064": null,
+    "description": "* 次のバナータイプを新たに２つ、バナーツールへ設定いただきたいです\n** 1. {{home_top}} （バナーツール上は、 {{HomeTop}}）\n** 2. {{home_component_1}}（バナーツール上は、 {{HomeComponent1}} ）\n\n\n\n* 希望期限としては、ひとまず6月21日(金)中にQA環境設定完了(HomePjで動作確認できるようになる)で考えておりますが、作業の工数感を把握できておらず、ご相談させていただきたいです。\n\n\n\n* 手順としては、次の流れを想定しております\n** QA環境で新しいバナータイプの設定を追加 (Eng)\n*** QA環境のバナーツールで新しいバナータイプが設定できるようになることを確認 (PM)\n** 本番環境ツールでも同様に設定 (Eng)\n*** 本番環境ツールでも同様に確認 (PM)\n\n\n\n* 他に確認が必要な事項などありましたらコメントください！\n\n",
+    "customfield_10010": [
+      "com.atlassian.greenhopper.service.sprint.Sprint@425724d3[id=2628,rapidViewId=753,state=CLOSED,name=Home Sprint (7/16~7/26),goal=,startDate=2019-07-16T01:48:36.467Z,endDate=2019-07-26T10:48:00.000Z,completeDate=2019-07-29T01:50:11.135Z,sequence=2628]",
+      "com.atlassian.greenhopper.service.sprint.Sprint@19354bdf[id=2777,rapidViewId=753,state=ACTIVE,name=Home Sprint (7/29~8/9),goal=Goal of this sprint\n- Complete all tasks in dev environment for iOS release\n- We will have dog fooding with Prod environment when this sprint finishes\n\nGoal of each section\n[iOS] - Complete \n[Android] - Do the best\n[Backend] - Bug fix, Production Deploy, 50% done of readiness check\n[DS] - Test Coverage Done, Cache\n[QA] - Functional QA Done\n[Design] - category icon,startDate=2019-07-28T23:00:24.641Z,endDate=2019-08-09T11:00:00.000Z,completeDate=<null>,sequence=2777]"
+    ],
+    "customfield_11066": null,
+    "customfield_10011": "0|i0ih5v:",
+    "customfield_11067": null,
+    "customfield_11101": null,
+    "customfield_10012": null,
+    "customfield_11102": null,
+    "customfield_11103": null,
+    "timetracking": {},
+    "customfield_11104": {
+      "self": "https://mercari.atlassian.net/rest/api/2/customFieldOption/10405",
+      "value": "Yes",
+      "id": "10405"
+    },
+    "customfield_10005": null,
+    "customfield_10006": null,
+    "security": null,
+    "customfield_10800": null,
+    "customfield_10801": null,
+    "attachment": [],
+    "customfield_10802": null,
+    "customfield_10803": null,
+    "customfield_10804": null,
+    "customfield_10805": null,
+    "customfield_10806": "2019-06-17",
+    "customfield_10807": null,
+    "summary": "[Backend] Add new banner type to banner tool",
+    "customfield_11050": null,
+    "customfield_11051": null,
+    "customfield_11053": null,
+    "customfield_11055": null,
+    "customfield_10000": "2019-06-14T11:38:34.169+0900",
+    "customfield_11056": null,
+    "customfield_11057": null,
+    "customfield_10001": null,
+    "customfield_11058": null,
+    "customfield_10002": null,
+    "customfield_10003": [],
+    "customfield_11059": null,
+    "customfield_10004": null,
+    "customfield_10400": "{}",
+    "environment": null,
+    "duedate": "2019-06-21",
+    "comment": {
+      "comments": [
+        {
+          "self": "https://mercari.atlassian.net/rest/api/2/issue/137901/comment/188138",
+          "id": "188138",
+          "author": {
+            "self": "https://mercari.atlassian.net/rest/api/2/user?accountId=5af509b1a73f7a591346357c",
+            "name": "hirakiuc",
+            "key": "hirakiuc",
+            "accountId": "5af509b1a73f7a591346357c",
+            "emailAddress": "hirakiuc@mercari.com",
+            "avatarUrls": {
+              "48x48": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5af509b1a73f7a591346357c/e93ca59e-33f0-43a5-8cfa-20e6e62da584/128?size=48&s=48",
+              "24x24": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5af509b1a73f7a591346357c/e93ca59e-33f0-43a5-8cfa-20e6e62da584/128?size=24&s=24",
+              "16x16": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5af509b1a73f7a591346357c/e93ca59e-33f0-43a5-8cfa-20e6e62da584/128?size=16&s=16",
+              "32x32": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5af509b1a73f7a591346357c/e93ca59e-33f0-43a5-8cfa-20e6e62da584/128?size=32&s=32"
+            },
+            "displayName": "Daisuke HIRAKIUCHI",
+            "active": true,
+            "timeZone": "Asia/Tokyo",
+            "accountType": "atlassian"
+          },
+          "body": "[https://mercari.slack.com/archives/C24ACBM41/p1560479772012400?thread_ts=1560392317.003900&cid=C24ACBM41|https://mercari.slack.com/archives/C24ACBM41/p1560479772012400?thread_ts=1560392317.003900&cid=C24ACBM41]",
+          "updateAuthor": {
+            "self": "https://mercari.atlassian.net/rest/api/2/user?accountId=5af509b1a73f7a591346357c",
+            "name": "hirakiuc",
+            "key": "hirakiuc",
+            "accountId": "5af509b1a73f7a591346357c",
+            "emailAddress": "hirakiuc@mercari.com",
+            "avatarUrls": {
+              "48x48": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5af509b1a73f7a591346357c/e93ca59e-33f0-43a5-8cfa-20e6e62da584/128?size=48&s=48",
+              "24x24": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5af509b1a73f7a591346357c/e93ca59e-33f0-43a5-8cfa-20e6e62da584/128?size=24&s=24",
+              "16x16": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5af509b1a73f7a591346357c/e93ca59e-33f0-43a5-8cfa-20e6e62da584/128?size=16&s=16",
+              "32x32": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5af509b1a73f7a591346357c/e93ca59e-33f0-43a5-8cfa-20e6e62da584/128?size=32&s=32"
+            },
+            "displayName": "Daisuke HIRAKIUCHI",
+            "active": true,
+            "timeZone": "Asia/Tokyo",
+            "accountType": "atlassian"
+          },
+          "created": "2019-06-14T11:38:34.169+0900",
+          "updated": "2019-06-14T11:38:34.169+0900",
+          "jsdPublic": true
+        },
+        {
+          "self": "https://mercari.atlassian.net/rest/api/2/issue/137901/comment/188152",
+          "id": "188152",
+          "author": {
+            "self": "https://mercari.atlassian.net/rest/api/2/user?accountId=5af509b1a73f7a591346357c",
+            "name": "hirakiuc",
+            "key": "hirakiuc",
+            "accountId": "5af509b1a73f7a591346357c",
+            "emailAddress": "hirakiuc@mercari.com",
+            "avatarUrls": {
+              "48x48": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5af509b1a73f7a591346357c/e93ca59e-33f0-43a5-8cfa-20e6e62da584/128?size=48&s=48",
+              "24x24": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5af509b1a73f7a591346357c/e93ca59e-33f0-43a5-8cfa-20e6e62da584/128?size=24&s=24",
+              "16x16": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5af509b1a73f7a591346357c/e93ca59e-33f0-43a5-8cfa-20e6e62da584/128?size=16&s=16",
+              "32x32": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5af509b1a73f7a591346357c/e93ca59e-33f0-43a5-8cfa-20e6e62da584/128?size=32&s=32"
+            },
+            "displayName": "Daisuke HIRAKIUCHI",
+            "active": true,
+            "timeZone": "Asia/Tokyo",
+            "accountType": "atlassian"
+          },
+          "body": "h2. 動作検証のメモ\n\nhirakiuc環境でざっくり機能確認したときのメモ\n\n* 既存のOptionElement\n** UIからはUpdateはできない (機能がない?)\n** UI上のボタンから削除はできない (すでに利用している設定があるから…?)\n* 新規でOptionElenentを追加\n** New->Optionの Type dropdownで {{バナータイプ1}} / {{バナータイプ2}} が含まれるようになり選択できるようになる\n\nh2. 方向性の案\n\n# 新規OptionElementをバナータイプで追加して、Enumの中に新しいバナータイプ2件を定義する?\n# GCP projectの中のdatastoreを探して直接updateする?\n\n=> 来週 tenntenn さんに確認しつつ進める\n\n",
+          "updateAuthor": {
+            "self": "https://mercari.atlassian.net/rest/api/2/user?accountId=5af509b1a73f7a591346357c",
+            "name": "hirakiuc",
+            "key": "hirakiuc",
+            "accountId": "5af509b1a73f7a591346357c",
+            "emailAddress": "hirakiuc@mercari.com",
+            "avatarUrls": {
+              "48x48": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5af509b1a73f7a591346357c/e93ca59e-33f0-43a5-8cfa-20e6e62da584/128?size=48&s=48",
+              "24x24": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5af509b1a73f7a591346357c/e93ca59e-33f0-43a5-8cfa-20e6e62da584/128?size=24&s=24",
+              "16x16": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5af509b1a73f7a591346357c/e93ca59e-33f0-43a5-8cfa-20e6e62da584/128?size=16&s=16",
+              "32x32": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5af509b1a73f7a591346357c/e93ca59e-33f0-43a5-8cfa-20e6e62da584/128?size=32&s=32"
+            },
+            "displayName": "Daisuke HIRAKIUCHI",
+            "active": true,
+            "timeZone": "Asia/Tokyo",
+            "accountType": "atlassian"
+          },
+          "created": "2019-06-14T11:46:35.746+0900",
+          "updated": "2019-06-14T11:46:35.746+0900",
+          "jsdPublic": true
+        },
+        {
+          "self": "https://mercari.atlassian.net/rest/api/2/issue/137901/comment/188154",
+          "id": "188154",
+          "author": {
+            "self": "https://mercari.atlassian.net/rest/api/2/user?accountId=5af509b1a73f7a591346357c",
+            "name": "hirakiuc",
+            "key": "hirakiuc",
+            "accountId": "5af509b1a73f7a591346357c",
+            "emailAddress": "hirakiuc@mercari.com",
+            "avatarUrls": {
+              "48x48": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5af509b1a73f7a591346357c/e93ca59e-33f0-43a5-8cfa-20e6e62da584/128?size=48&s=48",
+              "24x24": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5af509b1a73f7a591346357c/e93ca59e-33f0-43a5-8cfa-20e6e62da584/128?size=24&s=24",
+              "16x16": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5af509b1a73f7a591346357c/e93ca59e-33f0-43a5-8cfa-20e6e62da584/128?size=16&s=16",
+              "32x32": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5af509b1a73f7a591346357c/e93ca59e-33f0-43a5-8cfa-20e6e62da584/128?size=32&s=32"
+            },
+            "displayName": "Daisuke HIRAKIUCHI",
+            "active": true,
+            "timeZone": "Asia/Tokyo",
+            "accountType": "atlassian"
+          },
+          "body": "Ref: [https://wiki.mercari.in/user/shubham001/Banner_tool/Customize%20and%20setup%20banner%20Tool%20with%20mercari-mini#head5|https://wiki.mercari.in/user/shubham001/Banner_tool/Customize%20and%20setup%20banner%20Tool%20with%20mercari-mini#head5]",
+          "updateAuthor": {
+            "self": "https://mercari.atlassian.net/rest/api/2/user?accountId=5af509b1a73f7a591346357c",
+            "name": "hirakiuc",
+            "key": "hirakiuc",
+            "accountId": "5af509b1a73f7a591346357c",
+            "emailAddress": "hirakiuc@mercari.com",
+            "avatarUrls": {
+              "48x48": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5af509b1a73f7a591346357c/e93ca59e-33f0-43a5-8cfa-20e6e62da584/128?size=48&s=48",
+              "24x24": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5af509b1a73f7a591346357c/e93ca59e-33f0-43a5-8cfa-20e6e62da584/128?size=24&s=24",
+              "16x16": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5af509b1a73f7a591346357c/e93ca59e-33f0-43a5-8cfa-20e6e62da584/128?size=16&s=16",
+              "32x32": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5af509b1a73f7a591346357c/e93ca59e-33f0-43a5-8cfa-20e6e62da584/128?size=32&s=32"
+            },
+            "displayName": "Daisuke HIRAKIUCHI",
+            "active": true,
+            "timeZone": "Asia/Tokyo",
+            "accountType": "atlassian"
+          },
+          "created": "2019-06-14T11:51:08.153+0900",
+          "updated": "2019-06-14T11:51:08.153+0900",
+          "jsdPublic": true
+        },
+        {
+          "self": "https://mercari.atlassian.net/rest/api/2/issue/137901/comment/189769",
+          "id": "189769",
+          "author": {
+            "self": "https://mercari.atlassian.net/rest/api/2/user?accountId=5af509b1a73f7a591346357c",
+            "name": "hirakiuc",
+            "key": "hirakiuc",
+            "accountId": "5af509b1a73f7a591346357c",
+            "emailAddress": "hirakiuc@mercari.com",
+            "avatarUrls": {
+              "48x48": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5af509b1a73f7a591346357c/e93ca59e-33f0-43a5-8cfa-20e6e62da584/128?size=48&s=48",
+              "24x24": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5af509b1a73f7a591346357c/e93ca59e-33f0-43a5-8cfa-20e6e62da584/128?size=24&s=24",
+              "16x16": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5af509b1a73f7a591346357c/e93ca59e-33f0-43a5-8cfa-20e6e62da584/128?size=16&s=16",
+              "32x32": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5af509b1a73f7a591346357c/e93ca59e-33f0-43a5-8cfa-20e6e62da584/128?size=32&s=32"
+            },
+            "displayName": "Daisuke HIRAKIUCHI",
+            "active": true,
+            "timeZone": "Asia/Tokyo",
+            "accountType": "atlassian"
+          },
+          "body": "Ref: [https://mercari.slack.com/archives/C24ACBM41/p1560845342034300|https://mercari.slack.com/archives/C24ACBM41/p1560845342034300]\n\n相談した結果、UIからポチポチと操作して、新規OptionElementを追加する方向で。",
+          "updateAuthor": {
+            "self": "https://mercari.atlassian.net/rest/api/2/user?accountId=5af509b1a73f7a591346357c",
+            "name": "hirakiuc",
+            "key": "hirakiuc",
+            "accountId": "5af509b1a73f7a591346357c",
+            "emailAddress": "hirakiuc@mercari.com",
+            "avatarUrls": {
+              "48x48": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5af509b1a73f7a591346357c/e93ca59e-33f0-43a5-8cfa-20e6e62da584/128?size=48&s=48",
+              "24x24": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5af509b1a73f7a591346357c/e93ca59e-33f0-43a5-8cfa-20e6e62da584/128?size=24&s=24",
+              "16x16": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5af509b1a73f7a591346357c/e93ca59e-33f0-43a5-8cfa-20e6e62da584/128?size=16&s=16",
+              "32x32": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5af509b1a73f7a591346357c/e93ca59e-33f0-43a5-8cfa-20e6e62da584/128?size=32&s=32"
+            },
+            "displayName": "Daisuke HIRAKIUCHI",
+            "active": true,
+            "timeZone": "Asia/Tokyo",
+            "accountType": "atlassian"
+          },
+          "created": "2019-06-18T17:14:46.537+0900",
+          "updated": "2019-06-18T17:14:46.537+0900",
+          "jsdPublic": true
+        },
+        {
+          "self": "https://mercari.atlassian.net/rest/api/2/issue/137901/comment/190660",
+          "id": "190660",
+          "author": {
+            "self": "https://mercari.atlassian.net/rest/api/2/user?accountId=5af509b1a73f7a591346357c",
+            "name": "hirakiuc",
+            "key": "hirakiuc",
+            "accountId": "5af509b1a73f7a591346357c",
+            "emailAddress": "hirakiuc@mercari.com",
+            "avatarUrls": {
+              "48x48": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5af509b1a73f7a591346357c/e93ca59e-33f0-43a5-8cfa-20e6e62da584/128?size=48&s=48",
+              "24x24": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5af509b1a73f7a591346357c/e93ca59e-33f0-43a5-8cfa-20e6e62da584/128?size=24&s=24",
+              "16x16": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5af509b1a73f7a591346357c/e93ca59e-33f0-43a5-8cfa-20e6e62da584/128?size=16&s=16",
+              "32x32": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5af509b1a73f7a591346357c/e93ca59e-33f0-43a5-8cfa-20e6e62da584/128?size=32&s=32"
+            },
+            "displayName": "Daisuke HIRAKIUCHI",
+            "active": true,
+            "timeZone": "Asia/Tokyo",
+            "accountType": "atlassian"
+          },
+          "body": "{{String(banner_type) == Enum(__banner_type, `home_top,home_component_1`, `HomeTop,HomeComponent1`)}}",
+          "updateAuthor": {
+            "self": "https://mercari.atlassian.net/rest/api/2/user?accountId=5af509b1a73f7a591346357c",
+            "name": "hirakiuc",
+            "key": "hirakiuc",
+            "accountId": "5af509b1a73f7a591346357c",
+            "emailAddress": "hirakiuc@mercari.com",
+            "avatarUrls": {
+              "48x48": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5af509b1a73f7a591346357c/e93ca59e-33f0-43a5-8cfa-20e6e62da584/128?size=48&s=48",
+              "24x24": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5af509b1a73f7a591346357c/e93ca59e-33f0-43a5-8cfa-20e6e62da584/128?size=24&s=24",
+              "16x16": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5af509b1a73f7a591346357c/e93ca59e-33f0-43a5-8cfa-20e6e62da584/128?size=16&s=16",
+              "32x32": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5af509b1a73f7a591346357c/e93ca59e-33f0-43a5-8cfa-20e6e62da584/128?size=32&s=32"
+            },
+            "displayName": "Daisuke HIRAKIUCHI",
+            "active": true,
+            "timeZone": "Asia/Tokyo",
+            "accountType": "atlassian"
+          },
+          "created": "2019-06-19T21:41:10.865+0900",
+          "updated": "2019-06-19T21:41:10.865+0900",
+          "jsdPublic": true
+        }
+      ],
+      "maxResults": 5,
+      "total": 5,
+      "startAt": 0
+    }
+  }
+}
