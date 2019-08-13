@@ -27,3 +27,14 @@ func (client *Client) SearchIssues(args []string) ([]jira.Issue, error) {
 func args2jql(args []string) string {
 	return strings.Join(args, " AND ")
 }
+
+func (client *Client) GetIssue(issueID string) (*jira.Issue, error) {
+	opts := jira.GetQueryOptions{}
+
+	issue, _, err := client.jira.Issue.Get(issueID, &opts)
+	if err != nil {
+		return nil, err
+	}
+
+	return issue, nil
+}
