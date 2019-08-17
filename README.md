@@ -26,9 +26,6 @@ TBD: Add environment variables requirements
 ## CLI Usage
 
 ```
-$ jira {search}
-$ jira MJP-1234
-
 $ jira issue {search}
 $ jira issue #1234
 
