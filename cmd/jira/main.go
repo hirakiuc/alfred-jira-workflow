@@ -10,10 +10,14 @@ import (
 // Your workflow starts here
 func run(wf *aw.Workflow) func() {
 	return func() {
-		cmd := cli.ParseArgs(wf.Args())
+		cmd, err := cli.ParseArgs(wf.Args())
+		if err != nil {
+			wf.FatalError(err)
+			return
+		}
 		ctx := context.Background()
 
-		cmd.Run(ctx, wf)
+		(*cmd).Run(ctx, wf)
 
 		// Add a "Script Filter" result
 		// wf.NewItem("First result!")
