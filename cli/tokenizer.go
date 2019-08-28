@@ -1,6 +1,10 @@
 package cli
 
-import "strings"
+import (
+	"strings"
+
+	"github.com/mattn/go-shellwords"
+)
 
 const (
 	// Token types
@@ -18,11 +22,16 @@ func NewTokenizer() *Tokenizer {
 	}
 }
 
-func normalizeTokens(args []string) []string {
+func normalizeTokens(args []string) ([]string, error) {
 	ret := []string{}
 
+	parser := shellwords.NewParser()
+	// ["a b c d"] or ["a", "b", "c", "d"]
 	for _, component := range args {
-		parts := strings.Fields(component)
+		parts, err := parser.Parse(component)
+		if err != nil {
+			return []string{}, err
+		}
 
 		for _, arg := range parts {
 			v := strings.TrimSpace(arg)
@@ -32,12 +41,18 @@ func normalizeTokens(args []string) []string {
 		}
 	}
 
-	return ret
+	return ret, nil
 }
 
-func (t *Tokenizer) Tokenize(args []string) {
-	t.tokens = normalizeTokens(args)
+func (t *Tokenizer) Tokenize(args []string) error {
+	tokens, err := normalizeTokens(args)
+	if err != nil {
+		return err
+	}
+	t.tokens = tokens
 	t.pos = 0
+
+	return nil
 }
 
 func (t *Tokenizer) NextToken() string {

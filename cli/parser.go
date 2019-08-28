@@ -22,16 +22,20 @@ func NewParser() *Parser {
 	}
 }
 
-func ParseArgs(args []string) subcommand.SubCommand {
+func ParseArgs(args []string) (*subcommand.SubCommand, error) {
 	parser := NewParser()
 	return parser.Parse(args)
 }
 
-func (parser *Parser) Parse(args []string) subcommand.SubCommand {
-	parser.tokenizer.Tokenize(args)
+func (parser *Parser) Parse(args []string) (*subcommand.SubCommand, error) {
+	err := parser.tokenizer.Tokenize(args)
+	if err != nil {
+		return nil, err
+	}
 
 	token := parser.tokenizer.NextToken()
-	return parser.createSubCommand(token)
+	cmd := parser.createSubCommand(token)
+	return &cmd, nil
 }
 
 func (parser *Parser) createSubCommand(token string) subcommand.SubCommand {
