@@ -37,6 +37,10 @@ func (cmd HelpCommand) Run(_ctx context.Context, wf *aw.Workflow) {
 			name: "project",
 			desc: "",
 		},
+		{
+			name: "my-filter",
+			desc: "",
+		},
 	}
 
 	for _, cmd := range subcommands {
