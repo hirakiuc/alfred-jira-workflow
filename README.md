@@ -35,6 +35,9 @@ $ jira board {name} issue #1234
 
 $ jira project {project} issue {search}
 $ jira project {project} issue #1234
+
+$ jira my-filters {search}
+$ jira my-filters {name} issue {search}
 ```
 
 # License

@@ -3,9 +3,10 @@ package cli
 import "github.com/hirakiuc/alfred-jira-workflow/subcommand"
 
 const (
-	issueToken   = "issue"
-	boardToken   = "board"
-	projectToken = "project"
+	issueToken    = "issue"
+	boardToken    = "board"
+	projectToken  = "project"
+	myfilterToken = "my-filter"
 )
 
 type Parser struct {
@@ -48,6 +49,8 @@ func (parser *Parser) createSubCommand(token string) subcommand.SubCommand {
 		return subcommand.NewBoardCommand(args)
 	case projectToken:
 		return subcommand.NewProjectCommand(args)
+	case myfilterToken:
+		return subcommand.NewMyFilterCommand(args)
 	default:
 		options := append([]string{token}, args...)
 		return subcommand.NewHelpCommand(options)
