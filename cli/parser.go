@@ -2,6 +2,13 @@ package cli
 
 import "github.com/hirakiuc/alfred-jira-workflow/subcommand"
 
+const (
+	issueToken    = "issue"
+	boardToken    = "board"
+	projectToken  = "project"
+	myfilterToken = "my-filter"
+)
+
 type Parser struct {
 	tokenizer *Tokenizer
 }
@@ -16,17 +23,38 @@ func NewParser() *Parser {
 	}
 }
 
-func ParseArgs(args []string) subcommand.SubCommand {
+func ParseArgs(args []string) (*subcommand.SubCommand, error) {
 	parser := NewParser()
 	return parser.Parse(args)
 }
 
-func (parser *Parser) Parse(args []string) subcommand.SubCommand {
-	parser.tokenizer.Tokenize(args)
+func (parser *Parser) Parse(args []string) (*subcommand.SubCommand, error) {
+	err := parser.tokenizer.Tokenize(args)
+	if err != nil {
+		return nil, err
+	}
 
-	opts := parser.tokenizer.RestOfTokens()
+	token := parser.tokenizer.NextToken()
+	cmd := parser.createSubCommand(token)
+	return &cmd, nil
+}
 
-	return subcommand.NewIssueCommand(opts)
+func (parser *Parser) createSubCommand(token string) subcommand.SubCommand {
+	args := parser.tokenizer.RestOfTokens()
+
+	switch token {
+	case issueToken:
+		return subcommand.NewIssueCommand(args)
+	case boardToken:
+		return subcommand.NewBoardCommand(args)
+	case projectToken:
+		return subcommand.NewProjectCommand(args)
+	case myfilterToken:
+		return subcommand.NewMyFilterCommand(args)
+	default:
+		options := append([]string{token}, args...)
+		return subcommand.NewHelpCommand(options)
+	}
 }
 
 /*
@@ -34,7 +62,14 @@ func (parser *Parser) createSubCommandParser(token string) SubCommandParser {
 	args := parser.tokenizer.RestOfTokens()
 
 	switch token {
+	case issueToken:
+		return subcommand.NewIssueCommand(args)
+	case boardToken:
+		return subcommand.NewBoardCommand(args)
+	case projectToken:
+		return subcommand.NewProjectCommand(args)
 	default:
+		return subcommand.HelpCommand(args)
 	}
 }
 */

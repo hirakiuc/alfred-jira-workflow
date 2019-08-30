@@ -26,9 +26,6 @@ TBD: Add environment variables requirements
 ## CLI Usage
 
 ```
-$ jira {search}
-$ jira MJP-1234
-
 $ jira issue {search}
 $ jira issue #1234
 
@@ -38,6 +35,9 @@ $ jira board {name} issue #1234
 
 $ jira project {project} issue {search}
 $ jira project {project} issue #1234
+
+$ jira my-filters {search}
+$ jira my-filters {name} issue {search}
 ```
 
 # License

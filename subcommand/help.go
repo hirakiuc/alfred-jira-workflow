@@ -12,10 +12,10 @@ type HelpCommand struct {
 }
 
 // NewHelpCommand return an instance of this subcommand.
-func NewHelpCommand() HelpCommand {
+func NewHelpCommand(args []string) HelpCommand {
 	return HelpCommand{
 		BaseCommand{
-			Args: []string{},
+			Args: args,
 		},
 	}
 }
@@ -26,8 +26,20 @@ func (cmd HelpCommand) Run(_ctx context.Context, wf *aw.Workflow) {
 		desc string
 	}{
 		{
-			name: "{query}",
+			name: "issue",
 			desc: "search issue by jql",
+		},
+		{
+			name: "board",
+			desc: "",
+		},
+		{
+			name: "project",
+			desc: "",
+		},
+		{
+			name: "my-filter",
+			desc: "",
 		},
 	}
 
@@ -41,4 +53,7 @@ func (cmd HelpCommand) Run(_ctx context.Context, wf *aw.Workflow) {
 	if cmd.HasQuery() {
 		wf.Filter(cmd.Query())
 	}
+
+	// Show a warning in Alfred if there are no repos
+	wf.WarnEmpty("No commands found.", "")
 }
