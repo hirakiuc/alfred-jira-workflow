@@ -6,6 +6,7 @@ import (
 	"github.com/andygrunwald/go-jira"
 	aw "github.com/deanishe/awgo"
 	"github.com/hirakiuc/alfred-jira-workflow/api"
+	"github.com/hirakiuc/alfred-jira-workflow/jql"
 )
 
 type IssueCommand struct {
@@ -40,7 +41,8 @@ func (cmd IssueCommand) Run(_ctx context.Context, wf *aw.Workflow) {
 		return
 	}
 
-	issues, err := client.SearchIssues(cmd.Arguments())
+	jql := jql.BuildJQL(cmd.Arguments())
+	issues, err := client.SearchIssuesByJQL(jql)
 	if err != nil {
 		wf.FatalError(err)
 		return

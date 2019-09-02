@@ -1,6 +1,13 @@
 package cli
 
-import "github.com/hirakiuc/alfred-jira-workflow/subcommand"
+import (
+	"fmt"
+	"os"
+	"strings"
+
+	"github.com/hirakiuc/alfred-jira-workflow/subcommand"
+	"github.com/hirakiuc/alfred-jira-workflow/subcommand/filter"
+)
 
 const (
 	issueToken    = "issue"
@@ -50,11 +57,27 @@ func (parser *Parser) createSubCommand(token string) subcommand.SubCommand {
 	case projectToken:
 		return subcommand.NewProjectCommand(args)
 	case myfilterToken:
-		return subcommand.NewMyFilterCommand(args)
+		return parser.parseFilterSubCommand()
 	default:
 		options := append([]string{token}, args...)
 		return subcommand.NewHelpCommand(options)
 	}
+}
+
+func (parser *Parser) parseFilterSubCommand() subcommand.SubCommand {
+	args := parser.tokenizer.RestOfTokens()
+	fmt.Fprintf(os.Stderr, "args:%s", strings.Join(args, " , "))
+
+	if len(args) == 0 {
+		return subcommand.NewMyFilterCommand(args)
+	}
+
+	filterID := args[0]
+	if len(args) == 1 {
+		return filter.NewIssueCommand(filterID, []string{})
+	}
+
+	return filter.NewIssueCommand(filterID, args[1:])
 }
 
 /*
