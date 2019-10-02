@@ -55,7 +55,6 @@ func (cmd ProjectCommand) fetchProjectList(_ context.Context, wf *aw.Workflow) (
 	}
 
 	return store.Store(*result)
-
 }
 
 func (cmd ProjectCommand) Run(ctx context.Context, wf *aw.Workflow) {

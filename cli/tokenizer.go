@@ -55,6 +55,7 @@ func (t *Tokenizer) Tokenize(args []string) error {
 	return nil
 }
 
+// TBD: This method should be renamed to 'PopToken' as destructive method.
 func (t *Tokenizer) NextToken() string {
 	if !t.HasNextToken() {
 		return emptyToken
