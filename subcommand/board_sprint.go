@@ -3,8 +3,6 @@ package subcommand
 import (
 	"context"
 	"errors"
-	"fmt"
-	"os"
 	"strconv"
 
 	"github.com/andygrunwald/go-jira"
@@ -59,9 +57,7 @@ func (cmd BoardSprintCommand) Run(_ctx context.Context, wf *aw.Workflow) {
 		return
 	}
 
-	fmt.Fprintf(os.Stderr, "name:%s", cmd.BoardName)
-
-	//	board, err := client.GetBoardByName(cmd.BoardName)
+	// board, err := client.GetBoardByName(cmd.BoardName)
 	// TBD: temporary, fetch By BoardID
 	boardID, err := strconv.Atoi(cmd.BoardName)
 	if err != nil {
