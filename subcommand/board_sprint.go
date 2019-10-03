@@ -7,9 +7,8 @@ import (
 
 	"github.com/andygrunwald/go-jira"
 	aw "github.com/deanishe/awgo"
-	"github.com/hirakiuc/alfred-jira-workflow/api"
-	"github.com/hirakiuc/alfred-jira-workflow/cache"
 	"github.com/hirakiuc/alfred-jira-workflow/decorator"
+	"github.com/hirakiuc/alfred-jira-workflow/resource"
 )
 
 type BoardSprintCommand struct {
@@ -26,57 +25,37 @@ func NewBoardSprintCommand(name string, args []string) BoardSprintCommand {
 	}
 }
 
-func (cmd BoardSprintCommand) fetchSprints(
-	_ context.Context, wf *aw.Workflow, client *api.Client, boardID int) (
-	[]jira.Sprint, error) {
-	store := cache.NewSprintsCache(wf)
-
-	sprints, err := store.GetCache(boardID)
-	if err != nil {
-		return []jira.Sprint{}, err
-	}
-	if len(sprints) != 0 {
-		return sprints, nil
-	}
-
-	sprints, err = client.GetSprintsInBoard(boardID)
-	if err != nil {
-		return []jira.Sprint{}, err
-	}
-	if len(sprints) == 0 {
-		return []jira.Sprint{}, nil
-	}
-
-	return store.Store(sprints, boardID)
-}
-
-func (cmd BoardSprintCommand) Run(_ctx context.Context, wf *aw.Workflow) {
-	client, err := api.NewClient()
-	if err != nil {
-		wf.FatalError(err)
-		return
-	}
+func (cmd BoardSprintCommand) getBoard(ctx context.Context, wf *aw.Workflow) (*jira.Board, error) {
+	r := resource.NewBoardResource(wf)
 
 	// board, err := client.GetBoardByName(cmd.BoardName)
 	// TBD: temporary, fetch By BoardID
 	boardID, err := strconv.Atoi(cmd.BoardName)
 	if err != nil {
-		wf.FatalError(err)
-		return
+		return nil, err
 	}
 
-	board, err := client.GetBoardByID(boardID)
+	board, err := r.GetByID(ctx, boardID)
+	if err != nil {
+		return nil, err
+	}
+	if board == nil {
+		return nil, errors.New("no such board found")
+	}
+
+	return board, nil
+}
+
+func (cmd BoardSprintCommand) Run(ctx context.Context, wf *aw.Workflow) {
+	board, err := cmd.getBoard(ctx, wf)
 	if err != nil {
 		wf.FatalError(err)
 		return
 	}
-	if board == nil {
-		wf.FatalError(errors.New("no such board found"))
-		return
-	}
 
 	// fetch sprints in the board
-	sprints, err := cmd.fetchSprints(_ctx, wf, client, board.ID)
+	r := resource.NewSprintResource(wf)
+	sprints, err := r.GetAllByBoardID(ctx, board.ID)
 	if err != nil {
 		wf.FatalError(err)
 		return

@@ -4,11 +4,9 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/andygrunwald/go-jira"
 	aw "github.com/deanishe/awgo"
-	"github.com/hirakiuc/alfred-jira-workflow/api"
-	"github.com/hirakiuc/alfred-jira-workflow/cache"
 	"github.com/hirakiuc/alfred-jira-workflow/decorator"
+	"github.com/hirakiuc/alfred-jira-workflow/resource"
 )
 
 type BoardCommand struct {
@@ -23,36 +21,9 @@ func NewBoardCommand(args []string) BoardCommand {
 	}
 }
 
-func (cmd BoardCommand) fetchBoards(_ context.Context, wf *aw.Workflow) ([]jira.Board, error) {
-	store := cache.NewBoardsCache(wf)
-
-	boards, err := store.GetCache()
-	if err != nil {
-		return []jira.Board{}, err
-	}
-	if len(boards) != 0 {
-		return boards, nil
-	}
-
-	client, err := api.NewClient()
-	if err != nil {
-		return []jira.Board{}, err
-	}
-
-	boards, err = client.GetAllBoards("", "")
-	if err != nil {
-		return []jira.Board{}, err
-	}
-
-	if len(boards) == 0 {
-		return []jira.Board{}, nil
-	}
-
-	return store.Store(boards)
-}
-
 func (cmd BoardCommand) Run(ctx context.Context, wf *aw.Workflow) {
-	boards, err := cmd.fetchBoards(ctx, wf)
+	r := resource.NewBoardResource(wf)
+	boards, err := r.GetAll(ctx, "", "")
 	if err != nil {
 		wf.FatalError(err)
 		return
