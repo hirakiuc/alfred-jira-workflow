@@ -1,6 +1,8 @@
 package cli
 
-import "github.com/hirakiuc/alfred-jira-workflow/subcommand"
+import (
+	"github.com/hirakiuc/alfred-jira-workflow/subcommand"
+)
 
 const (
 	issueToken    = "issue"
@@ -65,7 +67,6 @@ func (p *Parser) parseBoardSubCommannd() subcommand.SubCommand {
 	}
 
 	// 'board', token, ...
-	token := p.tokenizer.NextToken()
-	parser := NewBoardCommandParser(p.tokenizer, token)
+	parser := NewBoardCommandParser(p.tokenizer)
 	return parser.Parse()
 }
