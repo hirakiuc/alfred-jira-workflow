@@ -8,9 +8,8 @@ import (
 
 	"github.com/andygrunwald/go-jira"
 	aw "github.com/deanishe/awgo"
-	"github.com/hirakiuc/alfred-jira-workflow/api"
-	"github.com/hirakiuc/alfred-jira-workflow/cache"
 	"github.com/hirakiuc/alfred-jira-workflow/decorator"
+	"github.com/hirakiuc/alfred-jira-workflow/resource"
 )
 
 // BoardHelpCommand describe a command to show the menus on board subcommands.
@@ -26,52 +25,9 @@ func NewBoardHelpCommand(args []string) BoardHelpCommand {
 	}
 }
 
-func (cmd BoardHelpCommand) fetchBoards(_ context.Context, wf *aw.Workflow) ([]jira.Board, error) {
-	store := cache.NewBoardsCache(wf)
-
-	boards, err := store.GetCache()
-	if err != nil {
-		return []jira.Board{}, err
-	}
-	if len(boards) != 0 {
-		return boards, nil
-	}
-
-	client, err := api.NewClient()
-	if err != nil {
-		return []jira.Board{}, err
-	}
-
-	boards, err = client.GetAllBoards("", "")
-	if err != nil {
-		return []jira.Board{}, err
-	}
-
-	if len(boards) == 0 {
-		return []jira.Board{}, nil
-	}
-
-	return store.Store(boards)
-}
-
-func (cmd BoardHelpCommand) fetchBoardByID(_ context.Context, _ *aw.Workflow, boardID int) (
-	*jira.Board, error) {
-	// TBD: refactoring
-	client, err := api.NewClient()
-	if err != nil {
-		return nil, err
-	}
-
-	board, err := client.GetBoardByID(boardID)
-	if err != nil {
-		return nil, err
-	}
-
-	return board, nil
-}
-
 func (cmd BoardHelpCommand) showBoardLists(ctx context.Context, wf *aw.Workflow) {
-	boards, err := cmd.fetchBoards(ctx, wf)
+	r := resource.NewBoardResource(wf)
+	boards, err := r.GetAll(ctx, "", "")
 	if err != nil {
 		wf.FatalError(err)
 		return
@@ -155,7 +111,8 @@ func (cmd BoardHelpCommand) Run(ctx context.Context, wf *aw.Workflow) {
 		return
 	}
 
-	board, err := cmd.fetchBoardByID(ctx, wf, boardID)
+	r := resource.NewBoardResource(wf)
+	board, err := r.GetByID(ctx, boardID)
 	if err != nil {
 		wf.FatalError(err)
 		return
