@@ -2,6 +2,7 @@ package subcommand
 
 import (
 	"context"
+	"fmt"
 
 	aw "github.com/deanishe/awgo"
 )
@@ -40,10 +41,10 @@ func (cmd BoardHelpCommand) Run(_ctx context.Context, wf *aw.Workflow) {
 		},
 	}
 
-	for _, cmd := range subcommands {
-		wf.NewItem(cmd.name).
-			Subtitle(cmd.desc).
-			Autocomplete(cmd.name).
+	for _, c := range subcommands {
+		wf.NewItem(c.name).
+			Subtitle(c.desc).
+			Autocomplete(fmt.Sprintf("board %s %s ", cmd.BoardName, c.name)).
 			Valid(false)
 	}
 
