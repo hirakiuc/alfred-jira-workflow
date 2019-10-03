@@ -8,6 +8,7 @@ import (
 	aw "github.com/deanishe/awgo"
 	"github.com/hirakiuc/alfred-jira-workflow/api"
 	"github.com/hirakiuc/alfred-jira-workflow/cache"
+	"github.com/hirakiuc/alfred-jira-workflow/decorator"
 )
 
 type BoardCommand struct {
@@ -20,10 +21,6 @@ func NewBoardCommand(args []string) BoardCommand {
 			Args: args,
 		},
 	}
-}
-
-func boardSubTitle(board jira.Board) string {
-	return fmt.Sprintf("%d - %s", board.ID, board.Self)
 }
 
 func (cmd BoardCommand) fetchBoards(_ context.Context, wf *aw.Workflow) ([]jira.Board, error) {
@@ -61,10 +58,20 @@ func (cmd BoardCommand) Run(ctx context.Context, wf *aw.Workflow) {
 		return
 	}
 
+	d, err := decorator.NewBoardDecorator(wf)
+	if err != nil {
+		wf.FatalError(err)
+		return
+	}
+
 	for _, board := range boards {
-		wf.NewItem(board.Name).
-			Subtitle(boardSubTitle(board)).
-			Arg(board.Self).
+		v := board
+		d.SetTarget(&v)
+
+		wf.NewItem(d.Title()).
+			Subtitle(d.Subtitle()).
+			Autocomplete(fmt.Sprintf("board %s ", v.Name)).
+			Arg(v.Self).
 			Valid(true)
 	}
 

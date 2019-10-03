@@ -1,12 +1,14 @@
 package api
 
 import (
+	"strings"
+
 	"github.com/andygrunwald/go-jira"
 )
 
 func (client *Client) GetAllBoards(projectKeyOrID string, word string) ([]jira.Board, error) {
 	opts := jira.BoardListOptions{
-		BoardType:      "kanban",
+		BoardType:      "scrum",
 		Name:           word,
 		ProjectKeyOrID: projectKeyOrID,
 	}
@@ -30,11 +32,27 @@ func (client *Client) GetAllBoards(projectKeyOrID string, word string) ([]jira.B
 	}
 }
 
-func (client *Client) GetAllSprints(boardID string) ([]jira.Sprint, error) {
-	sprints, _, err := client.jira.Board.GetAllSprints(boardID)
+func (client *Client) GetBoardByName(name string) (*jira.Board, error) {
+	boards, err := client.GetAllBoards("", name)
 	if err != nil {
-		return []jira.Sprint{}, err
+		return nil, err
 	}
 
-	return sprints, nil
+	for _, board := range boards {
+		if strings.TrimSpace(board.Name) == strings.TrimSpace(name) {
+			return &board, nil
+		}
+	}
+
+	// No such board found.
+	return nil, nil
+}
+
+func (client *Client) GetBoardByID(boardID int) (*jira.Board, error) {
+	board, _, err := client.jira.Board.GetBoard(boardID)
+	if err != nil {
+		return nil, err
+	}
+
+	return board, nil
 }
