@@ -12,29 +12,45 @@ const (
 
 // BoardCommandParser describe a parser for board subcommand
 type BoardCommandParser struct {
-	BoardName string
 	tokenizer *Tokenizer
 }
 
-func NewBoardCommandParser(tokenizer *Tokenizer, name string) *BoardCommandParser {
+func NewBoardCommandParser(tokenizer *Tokenizer) *BoardCommandParser {
 	return &BoardCommandParser{
-		BoardName: name,
 		tokenizer: tokenizer,
 	}
 }
 
 func (p *BoardCommandParser) Parse() subcommand.SubCommand {
+	// cmd: board
+	// => show  board list
+	args := p.tokenizer.RestOfTokens()
+	if len(args) == 0 {
+		return subcommand.NewBoardCommand(args)
+	}
+
+	// cmd: board {boardID} ...
+	// => show board help
+	// cmd: board {boardID} {token} ...
+	// => show subcommand
+	boardID := p.tokenizer.NextToken()
+	return p.parseBoardCommands(boardID)
+}
+
+func (p *BoardCommandParser) parseBoardCommands(boardID string) subcommand.SubCommand {
+	// cmd: board {token} [options...]
 	token := p.tokenizer.NextToken()
 	opts := p.tokenizer.RestOfTokens()
 
 	switch token {
 	case cmdTypeBoardBacklog:
-		return subcommand.NewBoardBacklogCommand(p.BoardName, opts)
+		return subcommand.NewBoardBacklogCommand(boardID, opts)
 	case cmdTypeBoardIssue:
-		return subcommand.NewBoardIssueCommand(p.BoardName, opts)
+		return subcommand.NewBoardIssueCommand(boardID, opts)
 	case cmdTypeBoardSprint:
-		return subcommand.NewBoardSprintCommand(p.BoardName, opts)
+		return subcommand.NewBoardSprintCommand(boardID, opts)
 	default:
-		return subcommand.NewBoardHelpCommand(p.BoardName, opts)
+		options := append([]string{boardID, token}, opts...)
+		return subcommand.NewBoardHelpCommand(options)
 	}
 }
