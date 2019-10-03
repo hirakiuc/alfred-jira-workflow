@@ -29,9 +29,20 @@ TBD: Add environment variables requirements
 $ jira issue {search}
 $ jira issue #1234
 
+# Board -> issue
 $ jira board {search}
-$ jira board {name} issue {search}
-$ jira board {name} issue #1234
+$ jira board {BoardID} issue {search}
+$ jira board {BoardID} issue #1234
+
+# Board -> sprint -> issue
+$ jira board {BoardID} sprint {query}
+-> show sprint in the board
+$ jira board {BoardID} sprint sprintID {query}
+-> show issues in the sprint of the board
+
+# Board -> backlog -> issue
+# jira board {BoardID} backlog {query}
+-> show issues in the backlog of the board
 
 $ jira project {project} issue {search}
 $ jira project {project} issue #1234
