@@ -1,7 +1,10 @@
 package cache
 
 import (
+	"crypto/sha256"
 	"fmt"
+	"strings"
+	"time"
 
 	"github.com/andygrunwald/go-jira"
 	aw "github.com/deanishe/awgo"
@@ -20,15 +23,9 @@ func NewIssuesCache(wf *aw.Workflow) *IssuesCache {
 	}
 }
 
-func (cache *IssuesCache) getCacheKey(jql string) string {
-	return fmt.Sprintf("issues-%s", jql)
-}
-
-func (cache *IssuesCache) GetCache(jql string) ([]jira.Issue, error) {
-	cacheKey := cache.getCacheKey(jql)
-
+func (cache *IssuesCache) getCacheWithKey(key string, cacheAge time.Duration) ([]jira.Issue, error) {
 	issues := []jira.Issue{}
-	err := cache.getRawCache(cacheKey, getMaxCacheAge(), &issues)
+	err := cache.getRawCache(key, cacheAge, &issues)
 	if err != nil {
 		return []jira.Issue{}, err
 	}
@@ -39,13 +36,29 @@ func (cache *IssuesCache) GetCache(jql string) ([]jira.Issue, error) {
 	return issues, nil
 }
 
-func (cache *IssuesCache) Store(jql string, issues []jira.Issue) ([]jira.Issue, error) {
-	cacheKey := cache.getCacheKey(jql)
-
-	_, err := cache.storeRawData(cacheKey, issues)
+func (cache *IssuesCache) storeWithKey(key string, issues []jira.Issue) ([]jira.Issue, error) {
+	_, err := cache.storeRawData(key, issues)
 	if err != nil {
 		return issues, err
 	}
 
 	return issues, nil
 }
+
+// ---------------------------------------------
+func (cache *IssuesCache) getCacheKeyWithJQL(jql string) string {
+	hash := sha256.Sum256([]byte(strings.TrimSpace(jql)))
+	return fmt.Sprintf("issues-jql-%s", fmt.Sprintf("%x", hash))
+}
+
+func (cache *IssuesCache) GetCacheByJQL(jql string) ([]jira.Issue, error) {
+	cacheKey := cache.getCacheKeyWithJQL(jql)
+	return cache.getCacheWithKey(cacheKey, getMaxCacheAge())
+}
+
+func (cache *IssuesCache) StoreByJQL(jql string, issues []jira.Issue) ([]jira.Issue, error) {
+	cacheKey := cache.getCacheKeyWithJQL(jql)
+	return cache.storeWithKey(cacheKey, issues)
+}
+
+// ---------------------------------------------

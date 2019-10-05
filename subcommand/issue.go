@@ -4,8 +4,8 @@ import (
 	"context"
 
 	aw "github.com/deanishe/awgo"
-	"github.com/hirakiuc/alfred-jira-workflow/api"
 	"github.com/hirakiuc/alfred-jira-workflow/decorator"
+	"github.com/hirakiuc/alfred-jira-workflow/resource"
 )
 
 type IssueCommand struct {
@@ -21,13 +21,9 @@ func NewIssueCommand(args []string) IssueCommand {
 }
 
 func (cmd IssueCommand) Run(_ctx context.Context, wf *aw.Workflow) {
-	client, err := api.NewClient()
-	if err != nil {
-		wf.FatalError(err)
-		return
-	}
+	r := resource.NewIssueResource(wf)
 
-	issues, err := client.SearchIssues(cmd.Arguments())
+	issues, err := r.SearchIssues(cmd.Args)
 	if err != nil {
 		wf.FatalError(err)
 		return
