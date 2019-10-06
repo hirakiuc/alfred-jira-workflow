@@ -2,10 +2,12 @@ package subcommand
 
 import (
 	"context"
+	"fmt"
+	"os"
 
 	aw "github.com/deanishe/awgo"
-	"github.com/hirakiuc/alfred-jira-workflow/api"
 	"github.com/hirakiuc/alfred-jira-workflow/decorator"
+	"github.com/hirakiuc/alfred-jira-workflow/resource"
 )
 
 type IssueCommand struct {
@@ -20,14 +22,31 @@ func NewIssueCommand(args []string) IssueCommand {
 	}
 }
 
-func (cmd IssueCommand) Run(_ctx context.Context, wf *aw.Workflow) {
-	client, err := api.NewClient()
-	if err != nil {
-		wf.FatalError(err)
-		return
+func splitArgs(args []string) ([]string, string) {
+	for _, w := range args {
+		fmt.Fprintf(os.Stderr, "word:%s\n", w)
 	}
 
-	issues, err := client.SearchIssues(cmd.Arguments())
+	l := len(args)
+	switch l {
+	case 0:
+		return []string{}, ""
+	case 1:
+		return args, ""
+	default:
+		return args[0:(l - 1)], args[l-1]
+	}
+}
+
+func (cmd IssueCommand) Run(_ctx context.Context, wf *aw.Workflow) {
+	r := resource.NewIssueResource(wf)
+
+	opts, word := splitArgs(cmd.Args)
+	for _, w := range opts {
+		fmt.Fprintf(os.Stderr, "w:%s\n", w)
+	}
+
+	issues, err := r.SearchIssues(opts)
 	if err != nil {
 		wf.FatalError(err)
 		return
@@ -48,8 +67,8 @@ func (cmd IssueCommand) Run(_ctx context.Context, wf *aw.Workflow) {
 			Valid(true)
 	}
 
-	if cmd.HasQuery() {
-		wf.Filter(cmd.Query())
+	if len(word) > 0 {
+		wf.Filter(word)
 	}
 
 	// Show a warning in Alfred if there are no items
