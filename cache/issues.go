@@ -48,7 +48,7 @@ func (cache *IssuesCache) storeWithKey(key string, issues []jira.Issue) ([]jira.
 // ---------------------------------------------
 func (cache *IssuesCache) getCacheKeyWithJQL(jql string) string {
 	hash := sha256.Sum256([]byte(strings.TrimSpace(jql)))
-	return fmt.Sprintf("issues-jql-%s", fmt.Sprintf("%x", hash))
+	return fmt.Sprintf("issues-jql-%x", hash)
 }
 
 func (cache *IssuesCache) GetCacheByJQL(jql string) ([]jira.Issue, error) {
