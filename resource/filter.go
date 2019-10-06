@@ -9,9 +9,7 @@ import (
 	"github.com/hirakiuc/alfred-jira-workflow/cache"
 )
 
-type FilterResource struct {
-	wf *aw.Workflow
-}
+type FilterResource struct{ wf *aw.Workflow }
 
 func NewFilterResource(wf *aw.Workflow) *FilterResource {
 	return &FilterResource{
@@ -20,8 +18,8 @@ func NewFilterResource(wf *aw.Workflow) *FilterResource {
 }
 
 func (r *FilterResource) MyFilters(_ context.Context) ([]jira.Filter, error) {
-	store := cache.NewMyFiltersCache(r.wf)
-	filters, err := store.GetCache()
+	store := cache.NewFiltersCache(r.wf)
+	filters, err := store.GetFiltersCache()
 	if err != nil {
 		return []jira.Filter{}, err
 	}
@@ -42,5 +40,31 @@ func (r *FilterResource) MyFilters(_ context.Context) ([]jira.Filter, error) {
 		return []jira.Filter{}, nil
 	}
 
-	return store.Store(filters)
+	return store.StoreFilters(filters)
+}
+
+func (r *FilterResource) GetFilterByID(filterID int) (*jira.Filter, error) {
+	store := cache.NewFiltersCache(r.wf)
+	filter, err := store.GetFilterCache(filterID)
+	if err != nil {
+		return nil, err
+	}
+	if filter != nil {
+		return filter, nil
+	}
+
+	client, err := api.NewClient()
+	if err != nil {
+		return nil, err
+	}
+
+	filter, err = client.GetFilterByID(filterID)
+	if err != nil {
+		return nil, err
+	}
+	if filter == nil {
+		return nil, nil
+	}
+
+	return store.StoreFilter(filter)
 }
