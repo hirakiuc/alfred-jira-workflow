@@ -3,10 +3,9 @@ package subcommand
 import (
 	"context"
 
-	"github.com/andygrunwald/go-jira"
 	aw "github.com/deanishe/awgo"
-	"github.com/hirakiuc/alfred-jira-workflow/api"
-	"github.com/hirakiuc/alfred-jira-workflow/cache"
+	"github.com/hirakiuc/alfred-jira-workflow/decorator"
+	"github.com/hirakiuc/alfred-jira-workflow/resource"
 )
 
 type MyFilterCommand struct {
@@ -21,43 +20,26 @@ func NewMyFilterCommand(args []string) MyFilterCommand {
 	}
 }
 
-func (cmd MyFilterCommand) fetchMyFilters(_ context.Context, wf *aw.Workflow) ([]jira.Filter, error) {
-	store := cache.NewMyFiltersCache(wf)
-
-	filters, err := store.GetCache()
-	if err != nil {
-		return []jira.Filter{}, err
-	}
-	if len(filters) != 0 {
-		return filters, nil
-	}
-
-	client, err := api.NewClient()
-	if err != nil {
-		return []jira.Filter{}, err
-	}
-
-	filters, err = client.MyFilters()
-	if err != nil {
-		return []jira.Filter{}, err
-	}
-	if len(filters) == 0 {
-		return []jira.Filter{}, nil
-	}
-
-	return store.Store(filters)
-}
-
 func (cmd MyFilterCommand) Run(ctx context.Context, wf *aw.Workflow) {
-	filters, err := cmd.fetchMyFilters(ctx, wf)
+	r := resource.NewFilterResource(wf)
+	filters, err := r.MyFilters(ctx)
+	if err != nil {
+		wf.FatalError(err)
+		return
+	}
+
+	d, err := decorator.NewFilterDecorator(wf)
 	if err != nil {
 		wf.FatalError(err)
 		return
 	}
 
 	for _, filter := range filters {
-		wf.NewItem(filter.Name).
-			Subtitle(filter.Description).
+		v := filter
+		d.SetTarget(&v)
+
+		wf.NewItem(d.Title()).
+			Subtitle(d.Subtitle()).
 			Arg(filter.Self).
 			Valid(true)
 	}
