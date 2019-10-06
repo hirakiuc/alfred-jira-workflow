@@ -43,3 +43,12 @@ func (client *Client) SearchFilters() ([]jira.FiltersListItem, error) {
 		opts.StartAt += int64(len(list.Values))
 	}
 }
+
+func (client *Client) GetFilterByID(filterID int) (*jira.Filter, error) {
+	filter, _, err := client.jira.Filter.Get(filterID)
+	if err != nil {
+		return nil, err
+	}
+
+	return filter, nil
+}
