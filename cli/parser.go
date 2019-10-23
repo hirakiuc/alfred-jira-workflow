@@ -69,5 +69,6 @@ func (p *Parser) parseBoardSubCommannd() subcommand.SubCommand {
 
 	// 'board', token, ...
 	parser := NewBoardCommandParser(p.tokenizer)
+
 	return parser.Parse()
 }
