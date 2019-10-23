@@ -38,6 +38,7 @@ func (p *Parser) Parse(args []string) (*subcommand.SubCommand, error) {
 
 	token := p.tokenizer.NextToken()
 	cmd := p.createSubCommand(token)
+
 	return &cmd, nil
 }
 
