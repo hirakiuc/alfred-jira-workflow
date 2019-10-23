@@ -26,6 +26,7 @@ func (r *SprintResource) GetAllByBoardID(_ context.Context, boardID int) ([]jira
 	if err != nil {
 		return []jira.Sprint{}, err
 	}
+
 	if len(sprints) != 0 {
 		return sprints, nil
 	}
@@ -39,6 +40,7 @@ func (r *SprintResource) GetAllByBoardID(_ context.Context, boardID int) ([]jira
 	if err != nil {
 		return []jira.Sprint{}, err
 	}
+
 	if len(sprints) == 0 {
 		return []jira.Sprint{}, nil
 	}

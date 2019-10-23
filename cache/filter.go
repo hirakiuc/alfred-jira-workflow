@@ -22,10 +22,12 @@ func NewFiltersCache(wf *aw.Workflow) *FiltersCache {
 
 func (cache *FiltersCache) getCacheWithKey(cacheKey string) ([]jira.Filter, error) {
 	filters := []jira.Filter{}
+
 	err := cache.getRawCache(cacheKey, getMaxCacheAge(), &filters)
 	if err != nil {
 		return []jira.Filter{}, err
 	}
+
 	if filters == nil {
 		return []jira.Filter{}, nil
 	}
@@ -64,10 +66,12 @@ func (cache *FiltersCache) getCacheKeyWithID(filterID int) string {
 
 func (cache *FiltersCache) GetFilterCache(filterID int) (*jira.Filter, error) {
 	cacheKey := cache.getCacheKeyWithID(filterID)
+
 	filters, err := cache.getCacheWithKey(cacheKey)
 	if err != nil {
 		return nil, err
 	}
+
 	if len(filters) == 0 {
 		return nil, nil
 	}
@@ -82,6 +86,7 @@ func (cache *FiltersCache) StoreFilter(filter *jira.Filter) (*jira.Filter, error
 	}
 
 	cacheKey := cache.getCacheKeyWithID(strID)
+
 	filters, err := cache.storeWithKey(cacheKey, []jira.Filter{*filter})
 	if err != nil {
 		return nil, err

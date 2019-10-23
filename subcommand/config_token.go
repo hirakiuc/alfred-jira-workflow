@@ -36,12 +36,14 @@ func (cmd ConfigTokenCommand) Run(ctx context.Context, wf *aw.Workflow) {
 			wf.FatalError(err)
 			return
 		}
+
 		if len(token) == 0 {
 			wf.WarnEmpty("No token found.", "")
 			return
 		}
 
 		wf.NewItem(fmt.Sprintf("Found token:%s", token))
+
 		return
 	}
 

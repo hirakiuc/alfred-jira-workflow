@@ -25,12 +25,13 @@ func (cache *BoardsCache) getCacheKey() string {
 
 func (cache *BoardsCache) GetCache() ([]jira.Board, error) {
 	cacheKey := cache.getCacheKey()
-
 	boards := []jira.Board{}
+
 	err := cache.getRawCache(cacheKey, getMaxCacheAge(), &boards)
 	if err != nil {
 		return []jira.Board{}, err
 	}
+
 	if boards == nil {
 		return []jira.Board{}, nil
 	}

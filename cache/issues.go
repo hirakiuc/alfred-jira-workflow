@@ -25,10 +25,12 @@ func NewIssuesCache(wf *aw.Workflow) *IssuesCache {
 
 func (cache *IssuesCache) getCacheWithKey(key string, cacheAge time.Duration) ([]jira.Issue, error) {
 	issues := []jira.Issue{}
+
 	err := cache.getRawCache(key, cacheAge, &issues)
 	if err != nil {
 		return []jira.Issue{}, err
 	}
+
 	if issues == nil {
 		return []jira.Issue{}, nil
 	}

@@ -39,6 +39,7 @@ func (cmd BoardSprintCommand) getBoard(ctx context.Context, wf *aw.Workflow) (*j
 	if err != nil {
 		return nil, err
 	}
+
 	if board == nil {
 		return nil, errors.New("no such board found")
 	}
@@ -55,6 +56,7 @@ func (cmd BoardSprintCommand) Run(ctx context.Context, wf *aw.Workflow) {
 
 	// fetch sprints in the board
 	r := resource.NewSprintResource(wf)
+
 	sprints, err := r.GetAllByBoardID(ctx, board.ID)
 	if err != nil {
 		wf.FatalError(err)

@@ -25,12 +25,13 @@ func (cache *ProjectListCache) getCacheKey() string {
 
 func (cache *ProjectListCache) GetCache() (jira.ProjectList, error) {
 	cacheKey := cache.getCacheKey()
-
 	list := jira.ProjectList{}
+
 	err := cache.getRawCache(cacheKey, getMaxCacheAge(), &list)
 	if err != nil {
 		return jira.ProjectList{}, err
 	}
+
 	if list == nil {
 		return jira.ProjectList{}, nil
 	}

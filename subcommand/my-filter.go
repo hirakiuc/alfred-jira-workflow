@@ -25,6 +25,7 @@ func NewMyFilterCommand(args []string) MyFilterCommand {
 
 func (cmd MyFilterCommand) showMyFilters(ctx context.Context, wf *aw.Workflow, opts []string) {
 	r := resource.NewFilterResource(wf)
+
 	filters, err := r.MyFilters(ctx)
 	if err != nil {
 		wf.FatalError(err)
@@ -57,6 +58,7 @@ func (cmd MyFilterCommand) showMyFilters(ctx context.Context, wf *aw.Workflow, o
 
 func (cmd MyFilterCommand) showFilteredIssues(_ context.Context, wf *aw.Workflow, filter *jira.Filter, opts []string) {
 	r := resource.NewIssueResource(wf)
+
 	issues, err := r.SearchIssues([]string{filter.Jql})
 	if err != nil {
 		wf.FatalError(err)
@@ -94,6 +96,7 @@ func (cmd MyFilterCommand) Run(ctx context.Context, wf *aw.Workflow) {
 	}
 
 	firstArg := cmd.Args[0]
+
 	opts := []string{}
 	if len(cmd.Args) > 1 {
 		opts = cmd.Args[1:]
@@ -107,6 +110,7 @@ func (cmd MyFilterCommand) Run(ctx context.Context, wf *aw.Workflow) {
 	}
 
 	r := resource.NewFilterResource(wf)
+
 	filter, err := r.GetFilterByID(filterID)
 	if err != nil || filter == nil {
 		// case:my-filter [word]... No such filter found

@@ -34,6 +34,7 @@ func (p *BoardCommandParser) Parse() subcommand.SubCommand {
 	// cmd: board {boardID} {token} ...
 	// => show subcommand
 	boardID := p.tokenizer.NextToken()
+
 	return p.parseBoardCommands(boardID)
 }
 

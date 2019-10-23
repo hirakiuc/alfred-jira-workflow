@@ -28,10 +28,12 @@ func normalizeTokens(args []string) ([]string, error) {
 	// Case: ["a b c d"] or ["a"]
 	if len(args) == 1 {
 		parser := shellwords.NewParser()
+
 		parts, err := parser.Parse(args[0])
 		if err != nil {
 			return []string{}, err
 		}
+
 		return parts, nil
 	}
 

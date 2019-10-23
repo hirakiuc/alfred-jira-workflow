@@ -27,6 +27,7 @@ func NewBoardHelpCommand(args []string) BoardHelpCommand {
 
 func (cmd BoardHelpCommand) showBoardLists(ctx context.Context, wf *aw.Workflow) {
 	r := resource.NewBoardResource(wf)
+
 	boards, err := r.GetAll(ctx, "", "")
 	if err != nil {
 		wf.FatalError(err)
@@ -112,11 +113,13 @@ func (cmd BoardHelpCommand) Run(ctx context.Context, wf *aw.Workflow) {
 	}
 
 	r := resource.NewBoardResource(wf)
+
 	board, err := r.GetByID(ctx, boardID)
 	if err != nil {
 		wf.FatalError(err)
 		return
 	}
+
 	if board == nil {
 		// no such board found
 		// => show boards list and filter by that string
