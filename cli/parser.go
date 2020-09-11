@@ -3,6 +3,9 @@ package cli
 import (
 	"github.com/hirakiuc/alfred-jira-workflow/subcommand"
 	"github.com/hirakiuc/alfred-jira-workflow/subcommand/board"
+	"github.com/hirakiuc/alfred-jira-workflow/subcommand/filter"
+	"github.com/hirakiuc/alfred-jira-workflow/subcommand/issue"
+	"github.com/hirakiuc/alfred-jira-workflow/subcommand/project"
 )
 
 const (
@@ -49,16 +52,16 @@ func (p *Parser) createSubCommand(token string) subcommand.SubCommand {
 
 	switch token {
 	case issueToken:
-		return subcommand.NewIssueCommand(args)
+		return issue.NewCommand(args)
 
 	case boardToken:
 		return p.parseBoardSubCommannd()
 
 	case projectToken:
-		return subcommand.NewProjectCommand(args)
+		return project.NewCommand(args)
 
 	case myfilterToken:
-		return subcommand.NewMyFilterCommand(args)
+		return filter.NewMyCommand(args)
 
 	default:
 		options := append([]string{token}, args...)

@@ -1,4 +1,4 @@
-package subcommand
+package filter
 
 import (
 	"context"
@@ -9,21 +9,22 @@ import (
 	aw "github.com/deanishe/awgo"
 	"github.com/hirakiuc/alfred-jira-workflow/decorator"
 	"github.com/hirakiuc/alfred-jira-workflow/resource"
+	"github.com/hirakiuc/alfred-jira-workflow/subcommand"
 )
 
-type MyFilterCommand struct {
-	BaseCommand
+type MyCommand struct {
+	subcommand.BaseCommand
 }
 
-func NewMyFilterCommand(args []string) MyFilterCommand {
-	return MyFilterCommand{
-		BaseCommand{
+func NewMyCommand(args []string) MyCommand {
+	return MyCommand{
+		BaseCommand: subcommand.BaseCommand{
 			Args: args,
 		},
 	}
 }
 
-func (cmd MyFilterCommand) showMyFilters(ctx context.Context, wf *aw.Workflow, opts []string) {
+func (cmd MyCommand) showMyFilters(ctx context.Context, wf *aw.Workflow, opts []string) {
 	r := resource.NewFilterResource(wf)
 
 	filters, err := r.MyFilters(ctx)
@@ -58,7 +59,7 @@ func (cmd MyFilterCommand) showMyFilters(ctx context.Context, wf *aw.Workflow, o
 	wf.WarnEmpty("No filters found.", "")
 }
 
-func (cmd MyFilterCommand) showFilteredIssues(_ context.Context, wf *aw.Workflow, filter *jira.Filter, opts []string) {
+func (cmd MyCommand) showFilteredIssues(_ context.Context, wf *aw.Workflow, filter *jira.Filter, opts []string) {
 	r := resource.NewIssueResource(wf)
 
 	issues, err := r.SearchIssues([]string{filter.Jql})
@@ -92,7 +93,7 @@ func (cmd MyFilterCommand) showFilteredIssues(_ context.Context, wf *aw.Workflow
 	wf.WarnEmpty("No issues found.", "")
 }
 
-func (cmd MyFilterCommand) Run(ctx context.Context, wf *aw.Workflow) {
+func (cmd MyCommand) Run(ctx context.Context, wf *aw.Workflow) {
 	if len(cmd.Args) == 0 {
 		// case:my-filter
 		cmd.showMyFilters(ctx, wf, cmd.Args)
