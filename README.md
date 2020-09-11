@@ -1,3 +1,5 @@
+![Go](https://github.com/hirakiuc/alfred-jira-workflow/workflows/Go/badge.svg)
+
 # alfred-jira-workflow
 
 Alfred workflow to view the JIRA resources.
