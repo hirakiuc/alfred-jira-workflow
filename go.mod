@@ -1,9 +1,9 @@
 module github.com/hirakiuc/alfred-jira-workflow
 
-go 1.12
+go 1.15
 
 require (
-	github.com/andygrunwald/go-jira v1.10.1-0.20190827015333-e9a261c52249
-	github.com/deanishe/awgo v0.20.3
-	github.com/mattn/go-shellwords v1.0.6
+	github.com/andygrunwald/go-jira v1.12.0
+	github.com/deanishe/awgo v0.27.1
+	github.com/mattn/go-shellwords v1.0.10
 )
