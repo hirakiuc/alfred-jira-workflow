@@ -19,10 +19,12 @@ func NewFilterResource(wf *aw.Workflow) *FilterResource {
 
 func (r *FilterResource) MyFilters(_ context.Context) ([]jira.Filter, error) {
 	store := cache.NewFiltersCache(r.wf)
+
 	filters, err := store.GetFiltersCache()
 	if err != nil {
 		return []jira.Filter{}, err
 	}
+
 	if len(filters) > 0 {
 		return filters, nil
 	}
@@ -36,6 +38,7 @@ func (r *FilterResource) MyFilters(_ context.Context) ([]jira.Filter, error) {
 	if err != nil {
 		return []jira.Filter{}, err
 	}
+
 	if len(filters) == 0 {
 		return []jira.Filter{}, nil
 	}
@@ -45,10 +48,12 @@ func (r *FilterResource) MyFilters(_ context.Context) ([]jira.Filter, error) {
 
 func (r *FilterResource) GetFilterByID(filterID int) (*jira.Filter, error) {
 	store := cache.NewFiltersCache(r.wf)
+
 	filter, err := store.GetFilterCache(filterID)
 	if err != nil {
 		return nil, err
 	}
+
 	if filter != nil {
 		return filter, nil
 	}
@@ -62,6 +67,7 @@ func (r *FilterResource) GetFilterByID(filterID int) (*jira.Filter, error) {
 	if err != nil {
 		return nil, err
 	}
+
 	if filter == nil {
 		return nil, nil
 	}

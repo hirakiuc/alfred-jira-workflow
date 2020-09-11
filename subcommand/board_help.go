@@ -27,20 +27,24 @@ func NewBoardHelpCommand(args []string) BoardHelpCommand {
 
 func (cmd BoardHelpCommand) showBoardLists(ctx context.Context, wf *aw.Workflow) {
 	r := resource.NewBoardResource(wf)
+
 	boards, err := r.GetAll(ctx, "", "")
 	if err != nil {
 		wf.FatalError(err)
+
 		return
 	}
 
 	d, err := decorator.NewBoardDecorator(wf)
 	if err != nil {
 		wf.FatalError(err)
+
 		return
 	}
 
 	for _, board := range boards {
 		v := board
+
 		d.SetTarget(&v)
 
 		wf.NewItem(d.Title()).
@@ -100,6 +104,7 @@ func (cmd BoardHelpCommand) Run(ctx context.Context, wf *aw.Workflow) {
 	if len(cmd.Args) == 0 {
 		// => show boards if no arguments are gives
 		cmd.showBoardLists(ctx, wf)
+
 		return
 	}
 
@@ -108,19 +113,24 @@ func (cmd BoardHelpCommand) Run(ctx context.Context, wf *aw.Workflow) {
 		// looks like filter string
 		// => show boards list and filter by that string
 		cmd.showBoardLists(ctx, wf)
+
 		return
 	}
 
 	r := resource.NewBoardResource(wf)
+
 	board, err := r.GetByID(ctx, boardID)
 	if err != nil {
 		wf.FatalError(err)
+
 		return
 	}
+
 	if board == nil {
 		// no such board found
 		// => show boards list and filter by that string
 		cmd.showBoardLists(ctx, wf)
+
 		return
 	}
 

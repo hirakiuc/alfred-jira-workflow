@@ -31,6 +31,7 @@ func (r *IssueResource) SearchIssues(args []string) ([]jira.Issue, error) {
 	if err != nil {
 		return []jira.Issue{}, err
 	}
+
 	if len(issues) > 0 {
 		return issues, nil
 	}
@@ -44,6 +45,7 @@ func (r *IssueResource) SearchIssues(args []string) ([]jira.Issue, error) {
 	if err != nil {
 		return []jira.Issue{}, err
 	}
+
 	if len(issues) == 0 {
 		return []jira.Issue{}, nil
 	}

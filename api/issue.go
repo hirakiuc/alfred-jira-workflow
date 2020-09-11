@@ -4,10 +4,14 @@ import (
 	"github.com/andygrunwald/go-jira"
 )
 
+const (
+	IssuesPerRequests int = 200
+)
+
 func (client *Client) SearchIssues(jql string) ([]jira.Issue, error) {
 	opts := jira.SearchOptions{
 		StartAt:    0,
-		MaxResults: 200,
+		MaxResults: IssuesPerRequests,
 	}
 
 	issues, _, err := client.jira.Issue.Search(jql, &opts)
