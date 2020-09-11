@@ -23,15 +23,18 @@ func NewBoardCommand(args []string) BoardCommand {
 
 func (cmd BoardCommand) Run(ctx context.Context, wf *aw.Workflow) {
 	r := resource.NewBoardResource(wf)
+
 	boards, err := r.GetAll(ctx, "", "")
 	if err != nil {
 		wf.FatalError(err)
+
 		return
 	}
 
 	d, err := decorator.NewBoardDecorator(wf)
 	if err != nil {
 		wf.FatalError(err)
+
 		return
 	}
 

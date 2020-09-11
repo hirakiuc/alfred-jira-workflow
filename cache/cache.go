@@ -36,12 +36,12 @@ func (cache *BaseCache) getRawCache(cacheKey string, expire time.Duration, v int
 	return nil
 }
 
-func (cache *BaseCache) storeRawData(cacheKey string, v interface{}) (interface{}, error) {
+func (cache *BaseCache) storeRawData(cacheKey string, v interface{}) error {
 	store := cache.wf.Cache
 
 	if err := store.StoreJSON(cacheKey, v); err != nil {
-		return nil, err
+		return err
 	}
 
-	return v, nil
+	return nil
 }

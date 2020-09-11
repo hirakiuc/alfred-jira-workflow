@@ -25,15 +25,18 @@ func NewMyFilterCommand(args []string) MyFilterCommand {
 
 func (cmd MyFilterCommand) showMyFilters(ctx context.Context, wf *aw.Workflow, opts []string) {
 	r := resource.NewFilterResource(wf)
+
 	filters, err := r.MyFilters(ctx)
 	if err != nil {
 		wf.FatalError(err)
+
 		return
 	}
 
 	d, err := decorator.NewFilterDecorator(wf)
 	if err != nil {
 		wf.FatalError(err)
+
 		return
 	}
 
@@ -57,15 +60,18 @@ func (cmd MyFilterCommand) showMyFilters(ctx context.Context, wf *aw.Workflow, o
 
 func (cmd MyFilterCommand) showFilteredIssues(_ context.Context, wf *aw.Workflow, filter *jira.Filter, opts []string) {
 	r := resource.NewIssueResource(wf)
+
 	issues, err := r.SearchIssues([]string{filter.Jql})
 	if err != nil {
 		wf.FatalError(err)
+
 		return
 	}
 
 	d, err := decorator.NewIssueDecorator(wf)
 	if err != nil {
 		wf.FatalError(err)
+
 		return
 	}
 
@@ -90,10 +96,12 @@ func (cmd MyFilterCommand) Run(ctx context.Context, wf *aw.Workflow) {
 	if len(cmd.Args) == 0 {
 		// case:my-filter
 		cmd.showMyFilters(ctx, wf, cmd.Args)
+
 		return
 	}
 
 	firstArg := cmd.Args[0]
+
 	opts := []string{}
 	if len(cmd.Args) > 1 {
 		opts = cmd.Args[1:]
@@ -103,14 +111,17 @@ func (cmd MyFilterCommand) Run(ctx context.Context, wf *aw.Workflow) {
 	if err != nil {
 		// case:my-filter [word] ...
 		cmd.showMyFilters(ctx, wf, cmd.Args)
+
 		return
 	}
 
 	r := resource.NewFilterResource(wf)
+
 	filter, err := r.GetFilterByID(filterID)
 	if err != nil || filter == nil {
 		// case:my-filter [word]... No such filter found
 		cmd.showMyFilters(ctx, wf, cmd.Args)
+
 		return
 	}
 

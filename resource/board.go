@@ -26,6 +26,7 @@ func (r *BoardResource) GetAll(_ context.Context, projectKeyOrID string, name st
 	if err != nil {
 		return []jira.Board{}, err
 	}
+
 	if len(boards) != 0 {
 		return boards, nil
 	}
@@ -39,6 +40,7 @@ func (r *BoardResource) GetAll(_ context.Context, projectKeyOrID string, name st
 	if err != nil {
 		return []jira.Board{}, err
 	}
+
 	if len(boards) == 0 {
 		return []jira.Board{}, nil
 	}

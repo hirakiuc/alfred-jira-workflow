@@ -25,10 +25,12 @@ func NewIssuesCache(wf *aw.Workflow) *IssuesCache {
 
 func (cache *IssuesCache) getCacheWithKey(key string, cacheAge time.Duration) ([]jira.Issue, error) {
 	issues := []jira.Issue{}
+
 	err := cache.getRawCache(key, cacheAge, &issues)
 	if err != nil {
 		return []jira.Issue{}, err
 	}
+
 	if issues == nil {
 		return []jira.Issue{}, nil
 	}
@@ -37,7 +39,7 @@ func (cache *IssuesCache) getCacheWithKey(key string, cacheAge time.Duration) ([
 }
 
 func (cache *IssuesCache) storeWithKey(key string, issues []jira.Issue) ([]jira.Issue, error) {
-	_, err := cache.storeRawData(key, issues)
+	err := cache.storeRawData(key, issues)
 	if err != nil {
 		return issues, err
 	}
@@ -46,18 +48,22 @@ func (cache *IssuesCache) storeWithKey(key string, issues []jira.Issue) ([]jira.
 }
 
 // ---------------------------------------------
+
 func (cache *IssuesCache) getCacheKeyWithJQL(jql string) string {
 	hash := sha256.Sum256([]byte(strings.TrimSpace(jql)))
+
 	return fmt.Sprintf("issues-jql-%x", hash)
 }
 
 func (cache *IssuesCache) GetCacheByJQL(jql string) ([]jira.Issue, error) {
 	cacheKey := cache.getCacheKeyWithJQL(jql)
+
 	return cache.getCacheWithKey(cacheKey, getMaxCacheAge())
 }
 
 func (cache *IssuesCache) StoreByJQL(jql string, issues []jira.Issue) ([]jira.Issue, error) {
 	cacheKey := cache.getCacheKeyWithJQL(jql)
+
 	return cache.storeWithKey(cacheKey, issues)
 }
 
