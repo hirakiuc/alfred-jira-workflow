@@ -1,4 +1,4 @@
-package subcommand
+package project
 
 import (
 	"context"
@@ -8,15 +8,16 @@ import (
 	aw "github.com/deanishe/awgo"
 	"github.com/hirakiuc/alfred-jira-workflow/api"
 	"github.com/hirakiuc/alfred-jira-workflow/cache"
+	"github.com/hirakiuc/alfred-jira-workflow/subcommand"
 )
 
-type ProjectCommand struct {
-	BaseCommand
+type Command struct {
+	subcommand.BaseCommand
 }
 
-func NewProjectCommand(args []string) ProjectCommand {
-	return ProjectCommand{
-		BaseCommand{
+func NewCommand(args []string) Command {
+	return Command{
+		BaseCommand: subcommand.BaseCommand{
 			Args: args,
 		},
 	}
@@ -30,7 +31,7 @@ func projectSubtitle(prjID string, prjSelf string) string {
 	return fmt.Sprintf("%s - %s", prjID, prjSelf)
 }
 
-func (cmd ProjectCommand) fetchProjectList(_ context.Context, wf *aw.Workflow) (jira.ProjectList, error) {
+func (cmd Command) fetchProjectList(_ context.Context, wf *aw.Workflow) (jira.ProjectList, error) {
 	store := cache.NewProjectListCache(wf)
 
 	list, err := store.GetCache()
@@ -59,7 +60,7 @@ func (cmd ProjectCommand) fetchProjectList(_ context.Context, wf *aw.Workflow) (
 	return store.Store(*result)
 }
 
-func (cmd ProjectCommand) Run(ctx context.Context, wf *aw.Workflow) {
+func (cmd Command) Run(ctx context.Context, wf *aw.Workflow) {
 	list, err := cmd.fetchProjectList(ctx, wf)
 	if err != nil {
 		wf.FatalError(err)
