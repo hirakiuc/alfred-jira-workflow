@@ -20,9 +20,8 @@ func NewBoardBacklogCommand(name string, args []string) BoardBacklogCommand {
 	}
 }
 
+// nolint:wsl
 func (cmd BoardBacklogCommand) Run(_ctx context.Context, wf *aw.Workflow) {
-	wf.NewItem("TBD show backlog in this board").
-		Valid(false)
 	/*
 		TBD
 		// Fetch the board
@@ -39,4 +38,7 @@ func (cmd BoardBacklogCommand) Run(_ctx context.Context, wf *aw.Workflow) {
 			wf.NewItem()
 		}
 	*/
+
+	wf.NewItem("TBD show backlog in this board").
+		Valid(false)
 }

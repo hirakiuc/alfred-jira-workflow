@@ -10,7 +10,7 @@ const (
 	cmdTypeBoardIssue   = "issue"
 )
 
-// BoardCommandParser describe a parser for board subcommand
+// BoardCommandParser describe a parser for board subcommand.
 type BoardCommandParser struct {
 	tokenizer *Tokenizer
 }
@@ -34,6 +34,7 @@ func (p *BoardCommandParser) Parse() subcommand.SubCommand {
 	// cmd: board {boardID} {token} ...
 	// => show subcommand
 	boardID := p.tokenizer.NextToken()
+
 	return p.parseBoardCommands(boardID)
 }
 
@@ -45,12 +46,16 @@ func (p *BoardCommandParser) parseBoardCommands(boardID string) subcommand.SubCo
 	switch token {
 	case cmdTypeBoardBacklog:
 		return subcommand.NewBoardBacklogCommand(boardID, opts)
+
 	case cmdTypeBoardIssue:
 		return subcommand.NewBoardIssueCommand(boardID, opts)
+
 	case cmdTypeBoardSprint:
 		return subcommand.NewBoardSprintCommand(boardID, opts)
+
 	default:
 		options := append([]string{boardID, token}, opts...)
+
 		return subcommand.NewBoardHelpCommand(options)
 	}
 }

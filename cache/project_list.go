@@ -1,8 +1,6 @@
 package cache
 
 import (
-	"fmt"
-
 	"github.com/andygrunwald/go-jira"
 	aw "github.com/deanishe/awgo"
 )
@@ -20,17 +18,19 @@ func NewProjectListCache(wf *aw.Workflow) *ProjectListCache {
 }
 
 func (cache *ProjectListCache) getCacheKey() string {
-	return fmt.Sprintf("project-list")
+	return "project-list"
 }
 
 func (cache *ProjectListCache) GetCache() (jira.ProjectList, error) {
 	cacheKey := cache.getCacheKey()
 
 	list := jira.ProjectList{}
+
 	err := cache.getRawCache(cacheKey, getMaxCacheAge(), &list)
 	if err != nil {
 		return jira.ProjectList{}, err
 	}
+
 	if list == nil {
 		return jira.ProjectList{}, nil
 	}
@@ -41,7 +41,7 @@ func (cache *ProjectListCache) GetCache() (jira.ProjectList, error) {
 func (cache *ProjectListCache) Store(list jira.ProjectList) (jira.ProjectList, error) {
 	cacheKey := cache.getCacheKey()
 
-	_, err := cache.storeRawData(cacheKey, list)
+	err := cache.storeRawData(cacheKey, list)
 	if err != nil {
 		return list, err
 	}
