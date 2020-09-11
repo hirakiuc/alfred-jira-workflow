@@ -2,12 +2,10 @@ package project
 
 import (
 	"context"
-	"fmt"
 
-	"github.com/andygrunwald/go-jira"
 	aw "github.com/deanishe/awgo"
-	"github.com/hirakiuc/alfred-jira-workflow/api"
-	"github.com/hirakiuc/alfred-jira-workflow/cache"
+	"github.com/hirakiuc/alfred-jira-workflow/decorator"
+	"github.com/hirakiuc/alfred-jira-workflow/resource"
 	"github.com/hirakiuc/alfred-jira-workflow/subcommand"
 )
 
@@ -23,45 +21,17 @@ func NewCommand(args []string) Command {
 	}
 }
 
-func projectTitle(key string, name string) string {
-	return fmt.Sprintf("%s - %s", key, name)
-}
-
-func projectSubtitle(prjID string, prjSelf string) string {
-	return fmt.Sprintf("%s - %s", prjID, prjSelf)
-}
-
-func (cmd Command) fetchProjectList(_ context.Context, wf *aw.Workflow) (jira.ProjectList, error) {
-	store := cache.NewProjectListCache(wf)
-
-	list, err := store.GetCache()
-	if err != nil {
-		return jira.ProjectList{}, err
-	}
-
-	if len(list) != 0 {
-		return list, nil
-	}
-
-	client, err := api.NewClient()
-	if err != nil {
-		return jira.ProjectList{}, err
-	}
-
-	result, err := client.GetProjects()
-	if err != nil {
-		return jira.ProjectList{}, err
-	}
-
-	if result == nil {
-		return jira.ProjectList{}, nil
-	}
-
-	return store.Store(*result)
-}
-
 func (cmd Command) Run(ctx context.Context, wf *aw.Workflow) {
-	list, err := cmd.fetchProjectList(ctx, wf)
+	r := resource.NewProjectResource(wf)
+
+	list, err := r.List(ctx)
+	if err != nil {
+		wf.FatalError(err)
+
+		return
+	}
+
+	d, err := decorator.NewProjectDecorator(wf)
 	if err != nil {
 		wf.FatalError(err)
 
@@ -69,8 +39,12 @@ func (cmd Command) Run(ctx context.Context, wf *aw.Workflow) {
 	}
 
 	for _, prj := range list {
-		wf.NewItem(projectTitle(prj.Key, prj.Name)).
-			Subtitle(projectSubtitle(prj.ID, prj.Self)).
+		v := prj
+
+		d.SetTarget(&v)
+
+		wf.NewItem(d.GetTitle()).
+			Subtitle(d.GetSubtitle()).
 			Arg(prj.Self).
 			Valid(true)
 	}
