@@ -27,10 +27,12 @@ func (cache *SprintsCache) GetCache(boardID int) ([]jira.Sprint, error) {
 	cacheKey := cache.getCacheKey(boardID)
 
 	sprints := []jira.Sprint{}
+
 	err := cache.getRawCache(cacheKey, getMaxCacheAge(), &sprints)
 	if err != nil {
 		return []jira.Sprint{}, err
 	}
+
 	if sprints == nil {
 		return []jira.Sprint{}, nil
 	}
@@ -41,7 +43,7 @@ func (cache *SprintsCache) GetCache(boardID int) ([]jira.Sprint, error) {
 func (cache *SprintsCache) Store(sprints []jira.Sprint, boardID int) ([]jira.Sprint, error) {
 	cacheKey := cache.getCacheKey(boardID)
 
-	_, err := cache.storeRawData(cacheKey, sprints)
+	err := cache.storeRawData(cacheKey, sprints)
 	if err != nil {
 		return sprints, err
 	}

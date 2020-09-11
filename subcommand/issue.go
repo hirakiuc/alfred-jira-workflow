@@ -49,12 +49,14 @@ func (cmd IssueCommand) Run(_ctx context.Context, wf *aw.Workflow) {
 	issues, err := r.SearchIssues(opts)
 	if err != nil {
 		wf.FatalError(err)
+
 		return
 	}
 
 	d, err := decorator.NewIssueDecorator(wf)
 	if err != nil {
 		wf.FatalError(err)
+
 		return
 	}
 

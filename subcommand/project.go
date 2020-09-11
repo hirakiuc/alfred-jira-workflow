@@ -37,6 +37,7 @@ func (cmd ProjectCommand) fetchProjectList(_ context.Context, wf *aw.Workflow) (
 	if err != nil {
 		return jira.ProjectList{}, err
 	}
+
 	if len(list) != 0 {
 		return list, nil
 	}
@@ -50,6 +51,7 @@ func (cmd ProjectCommand) fetchProjectList(_ context.Context, wf *aw.Workflow) (
 	if err != nil {
 		return jira.ProjectList{}, err
 	}
+
 	if result == nil {
 		return jira.ProjectList{}, nil
 	}
@@ -61,6 +63,7 @@ func (cmd ProjectCommand) Run(ctx context.Context, wf *aw.Workflow) {
 	list, err := cmd.fetchProjectList(ctx, wf)
 	if err != nil {
 		wf.FatalError(err)
+
 		return
 	}
 

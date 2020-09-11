@@ -27,6 +27,7 @@ func NewParser() *Parser {
 
 func ParseArgs(args []string) (*subcommand.SubCommand, error) {
 	p := NewParser()
+
 	return p.Parse(args)
 }
 
@@ -38,6 +39,7 @@ func (p *Parser) Parse(args []string) (*subcommand.SubCommand, error) {
 
 	token := p.tokenizer.NextToken()
 	cmd := p.createSubCommand(token)
+
 	return &cmd, nil
 }
 
@@ -47,14 +49,19 @@ func (p *Parser) createSubCommand(token string) subcommand.SubCommand {
 	switch token {
 	case issueToken:
 		return subcommand.NewIssueCommand(args)
+
 	case boardToken:
 		return p.parseBoardSubCommannd()
+
 	case projectToken:
 		return subcommand.NewProjectCommand(args)
+
 	case myfilterToken:
 		return subcommand.NewMyFilterCommand(args)
+
 	default:
 		options := append([]string{token}, args...)
+
 		return subcommand.NewHelpCommand(options)
 	}
 }
@@ -68,5 +75,6 @@ func (p *Parser) parseBoardSubCommannd() subcommand.SubCommand {
 
 	// 'board', token, ...
 	parser := NewBoardCommandParser(p.tokenizer)
+
 	return parser.Parse()
 }

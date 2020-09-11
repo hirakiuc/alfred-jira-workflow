@@ -7,14 +7,16 @@ import (
 	"github.com/hirakiuc/alfred-jira-workflow/cli"
 )
 
-// Your workflow starts here
+// Your workflow starts here.
 func run(wf *aw.Workflow) func() {
 	return func() {
 		cmd, err := cli.ParseArgs(wf.Args())
 		if err != nil {
 			wf.FatalError(err)
+
 			return
 		}
+
 		ctx := context.Background()
 
 		(*cmd).Run(ctx, wf)

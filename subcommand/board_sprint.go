@@ -3,6 +3,7 @@ package subcommand
 import (
 	"context"
 	"errors"
+	"fmt"
 	"strconv"
 
 	"github.com/andygrunwald/go-jira"
@@ -10,6 +11,8 @@ import (
 	"github.com/hirakiuc/alfred-jira-workflow/decorator"
 	"github.com/hirakiuc/alfred-jira-workflow/resource"
 )
+
+var errNotFound = errors.New("no such resource found")
 
 type BoardSprintCommand struct {
 	BoardName string
@@ -39,8 +42,9 @@ func (cmd BoardSprintCommand) getBoard(ctx context.Context, wf *aw.Workflow) (*j
 	if err != nil {
 		return nil, err
 	}
+
 	if board == nil {
-		return nil, errors.New("no such board found")
+		return nil, fmt.Errorf("%w: board", errNotFound)
 	}
 
 	return board, nil
@@ -50,20 +54,24 @@ func (cmd BoardSprintCommand) Run(ctx context.Context, wf *aw.Workflow) {
 	board, err := cmd.getBoard(ctx, wf)
 	if err != nil {
 		wf.FatalError(err)
+
 		return
 	}
 
 	// fetch sprints in the board
 	r := resource.NewSprintResource(wf)
+
 	sprints, err := r.GetAllByBoardID(ctx, board.ID)
 	if err != nil {
 		wf.FatalError(err)
+
 		return
 	}
 
 	d, err := decorator.NewSprintDecorator(wf)
 	if err != nil {
 		wf.FatalError(err)
+
 		return
 	}
 
