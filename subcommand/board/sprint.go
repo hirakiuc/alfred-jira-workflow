@@ -1,4 +1,4 @@
-package subcommand
+package board
 
 import (
 	"context"
@@ -10,25 +10,26 @@ import (
 	aw "github.com/deanishe/awgo"
 	"github.com/hirakiuc/alfred-jira-workflow/decorator"
 	"github.com/hirakiuc/alfred-jira-workflow/resource"
+	"github.com/hirakiuc/alfred-jira-workflow/subcommand"
 )
 
 var errNotFound = errors.New("no such resource found")
 
-type BoardSprintCommand struct {
+type SprintCommand struct {
 	BoardName string
-	BaseCommand
+	subcommand.BaseCommand
 }
 
-func NewBoardSprintCommand(name string, args []string) BoardSprintCommand {
-	return BoardSprintCommand{
+func NewSprintCommand(name string, args []string) SprintCommand {
+	return SprintCommand{
 		BoardName: name,
-		BaseCommand: BaseCommand{
+		BaseCommand: subcommand.BaseCommand{
 			Args: args,
 		},
 	}
 }
 
-func (cmd BoardSprintCommand) getBoard(ctx context.Context, wf *aw.Workflow) (*jira.Board, error) {
+func (cmd SprintCommand) getBoard(ctx context.Context, wf *aw.Workflow) (*jira.Board, error) {
 	r := resource.NewBoardResource(wf)
 
 	// board, err := client.GetBoardByName(cmd.BoardName)
@@ -50,7 +51,7 @@ func (cmd BoardSprintCommand) getBoard(ctx context.Context, wf *aw.Workflow) (*j
 	return board, nil
 }
 
-func (cmd BoardSprintCommand) Run(ctx context.Context, wf *aw.Workflow) {
+func (cmd SprintCommand) Run(ctx context.Context, wf *aw.Workflow) {
 	board, err := cmd.getBoard(ctx, wf)
 	if err != nil {
 		wf.FatalError(err)

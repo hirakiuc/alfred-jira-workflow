@@ -1,4 +1,4 @@
-package subcommand
+package board
 
 import (
 	"context"
@@ -7,21 +7,22 @@ import (
 	aw "github.com/deanishe/awgo"
 	"github.com/hirakiuc/alfred-jira-workflow/decorator"
 	"github.com/hirakiuc/alfred-jira-workflow/resource"
+	"github.com/hirakiuc/alfred-jira-workflow/subcommand"
 )
 
-type BoardCommand struct {
-	BaseCommand
+type Command struct {
+	subcommand.BaseCommand
 }
 
-func NewBoardCommand(args []string) BoardCommand {
-	return BoardCommand{
-		BaseCommand{
+func NewCommand(args []string) Command {
+	return Command{
+		subcommand.BaseCommand{
 			Args: args,
 		},
 	}
 }
 
-func (cmd BoardCommand) Run(ctx context.Context, wf *aw.Workflow) {
+func (cmd Command) Run(ctx context.Context, wf *aw.Workflow) {
 	r := resource.NewBoardResource(wf)
 
 	boards, err := r.GetAll(ctx, "", "")
