@@ -1,4 +1,4 @@
-package subcommand
+package issue
 
 import (
 	"context"
@@ -8,15 +8,16 @@ import (
 	aw "github.com/deanishe/awgo"
 	"github.com/hirakiuc/alfred-jira-workflow/decorator"
 	"github.com/hirakiuc/alfred-jira-workflow/resource"
+	"github.com/hirakiuc/alfred-jira-workflow/subcommand"
 )
 
-type IssueCommand struct {
-	BaseCommand
+type Command struct {
+	subcommand.BaseCommand
 }
 
-func NewIssueCommand(args []string) IssueCommand {
-	return IssueCommand{
-		BaseCommand{
+func NewCommand(args []string) Command {
+	return Command{
+		BaseCommand: subcommand.BaseCommand{
 			Args: args,
 		},
 	}
@@ -38,7 +39,7 @@ func splitArgs(args []string) ([]string, string) {
 	}
 }
 
-func (cmd IssueCommand) Run(_ctx context.Context, wf *aw.Workflow) {
+func (cmd Command) Run(_ctx context.Context, wf *aw.Workflow) {
 	r := resource.NewIssueResource(wf)
 
 	opts, word := splitArgs(cmd.Args)

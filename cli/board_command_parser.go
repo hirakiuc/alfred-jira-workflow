@@ -2,6 +2,7 @@ package cli
 
 import (
 	"github.com/hirakiuc/alfred-jira-workflow/subcommand"
+	"github.com/hirakiuc/alfred-jira-workflow/subcommand/board"
 )
 
 const (
@@ -26,7 +27,7 @@ func (p *BoardCommandParser) Parse() subcommand.SubCommand {
 	// => show  board list
 	args := p.tokenizer.RestOfTokens()
 	if len(args) == 0 {
-		return subcommand.NewBoardCommand(args)
+		return board.NewCommand(args)
 	}
 
 	// cmd: board {boardID} ...
@@ -45,17 +46,17 @@ func (p *BoardCommandParser) parseBoardCommands(boardID string) subcommand.SubCo
 
 	switch token {
 	case cmdTypeBoardBacklog:
-		return subcommand.NewBoardBacklogCommand(boardID, opts)
+		return board.NewBacklogCommand(boardID, opts)
 
 	case cmdTypeBoardIssue:
-		return subcommand.NewBoardIssueCommand(boardID, opts)
+		return board.NewIssueCommand(boardID, opts)
 
 	case cmdTypeBoardSprint:
-		return subcommand.NewBoardSprintCommand(boardID, opts)
+		return board.NewSprintCommand(boardID, opts)
 
 	default:
 		options := append([]string{boardID, token}, opts...)
 
-		return subcommand.NewBoardHelpCommand(options)
+		return board.NewHelpCommand(options)
 	}
 }
