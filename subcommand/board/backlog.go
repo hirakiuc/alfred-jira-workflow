@@ -1,27 +1,28 @@
-package subcommand
+package board
 
 import (
 	"context"
 
 	aw "github.com/deanishe/awgo"
+	"github.com/hirakiuc/alfred-jira-workflow/subcommand"
 )
 
-type BoardBacklogCommand struct {
+type BacklogCommand struct {
 	BoardName string
-	BaseCommand
+	subcommand.BaseCommand
 }
 
-func NewBoardBacklogCommand(name string, args []string) BoardBacklogCommand {
-	return BoardBacklogCommand{
+func NewBacklogCommand(name string, args []string) BacklogCommand {
+	return BacklogCommand{
 		BoardName: name,
-		BaseCommand: BaseCommand{
+		BaseCommand: subcommand.BaseCommand{
 			Args: args,
 		},
 	}
 }
 
 // nolint:wsl
-func (cmd BoardBacklogCommand) Run(_ctx context.Context, wf *aw.Workflow) {
+func (cmd BacklogCommand) Run(_ctx context.Context, wf *aw.Workflow) {
 	/*
 		TBD
 		// Fetch the board

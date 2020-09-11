@@ -2,6 +2,7 @@ package cli
 
 import (
 	"github.com/hirakiuc/alfred-jira-workflow/subcommand"
+	"github.com/hirakiuc/alfred-jira-workflow/subcommand/board"
 )
 
 const (
@@ -70,7 +71,7 @@ func (p *Parser) parseBoardSubCommannd() subcommand.SubCommand {
 	args := p.tokenizer.RestOfTokens()
 	if len(args) == 0 {
 		// 'board', ... => show board list
-		return subcommand.NewBoardCommand(args)
+		return board.NewCommand(args)
 	}
 
 	// 'board', token, ...
