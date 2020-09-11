@@ -44,7 +44,7 @@ func (cmd BoardSprintCommand) getBoard(ctx context.Context, wf *aw.Workflow) (*j
 	}
 
 	if board == nil {
-		return nil, fmt.Errorf("no such board found:%w", errNotFound)
+		return nil, fmt.Errorf("%w: board", errNotFound)
 	}
 
 	return board, nil
