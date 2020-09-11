@@ -1,4 +1,4 @@
-package subcommand
+package board
 
 import (
 	"context"
@@ -10,22 +10,23 @@ import (
 	aw "github.com/deanishe/awgo"
 	"github.com/hirakiuc/alfred-jira-workflow/decorator"
 	"github.com/hirakiuc/alfred-jira-workflow/resource"
+	"github.com/hirakiuc/alfred-jira-workflow/subcommand"
 )
 
-// BoardHelpCommand describe a command to show the menus on board subcommands.
-type BoardHelpCommand struct {
-	BaseCommand
+// HelpCommand describe a command to show the menus on board subcommands.
+type HelpCommand struct {
+	subcommand.BaseCommand
 }
 
-func NewBoardHelpCommand(args []string) BoardHelpCommand {
-	return BoardHelpCommand{
-		BaseCommand: BaseCommand{
+func NewHelpCommand(args []string) HelpCommand {
+	return HelpCommand{
+		BaseCommand: subcommand.BaseCommand{
 			Args: args,
 		},
 	}
 }
 
-func (cmd BoardHelpCommand) showBoardLists(ctx context.Context, wf *aw.Workflow) {
+func (cmd HelpCommand) showBoardLists(ctx context.Context, wf *aw.Workflow) {
 	r := resource.NewBoardResource(wf)
 
 	boards, err := r.GetAll(ctx, "", "")
@@ -62,7 +63,7 @@ func (cmd BoardHelpCommand) showBoardLists(ctx context.Context, wf *aw.Workflow)
 	wf.WarnEmpty("No boards found.", "")
 }
 
-func (cmd BoardHelpCommand) showHelpMenus(_ context.Context, wf *aw.Workflow, board *jira.Board) {
+func (cmd HelpCommand) showHelpMenus(_ context.Context, wf *aw.Workflow, board *jira.Board) {
 	subcommands := []struct {
 		name string
 		desc string
@@ -98,7 +99,7 @@ func (cmd BoardHelpCommand) showHelpMenus(_ context.Context, wf *aw.Workflow, bo
 	wf.WarnEmpty("No items found.", "")
 }
 
-func (cmd BoardHelpCommand) Run(ctx context.Context, wf *aw.Workflow) {
+func (cmd HelpCommand) Run(ctx context.Context, wf *aw.Workflow) {
 	// boards {boardID}, [arg, ...]
 	// If boardID is the numeric string & such board found, show help
 	if len(cmd.Args) == 0 {
