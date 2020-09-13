@@ -19,6 +19,31 @@ func NewProjectResource(wf *aw.Workflow) *ProjectResource {
 	}
 }
 
+func (r *ProjectResource) GetByID(ctx context.Context, prjID string) (*model.ProjectData, error) {
+	store := cache.NewProjectCache(r.wf)
+
+	prj, err := store.GetCache(prjID)
+	if err != nil {
+		return nil, err
+	}
+
+	if prj != nil {
+		return prj, nil
+	}
+
+	client, err := api.NewClient()
+	if err != nil {
+		return nil, err
+	}
+
+	project, err := client.GetProjectByID(ctx, prjID)
+	if err != nil {
+		return nil, err
+	}
+
+	return model.ConvertProject(project), nil
+}
+
 func (r *ProjectResource) List(ctx context.Context) ([]model.ProjectData, error) {
 	store := cache.NewProjectListCache(r.wf)
 
