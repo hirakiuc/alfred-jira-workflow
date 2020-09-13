@@ -2,10 +2,8 @@ package cli
 
 import (
 	"github.com/hirakiuc/alfred-jira-workflow/subcommand"
-	"github.com/hirakiuc/alfred-jira-workflow/subcommand/board"
 	"github.com/hirakiuc/alfred-jira-workflow/subcommand/filter"
 	"github.com/hirakiuc/alfred-jira-workflow/subcommand/issue"
-	"github.com/hirakiuc/alfred-jira-workflow/subcommand/project"
 )
 
 const (
@@ -55,10 +53,14 @@ func (p *Parser) createSubCommand(token string) subcommand.SubCommand {
 		return issue.NewCommand(args)
 
 	case boardToken:
-		return p.parseBoardSubCommannd()
+		parser := NewBoardCommandParser(p.tokenizer)
+
+		return parser.Parse()
 
 	case projectToken:
-		return project.NewCommand(args)
+		parser := NewProjectCommandParser(p.tokenizer)
+
+		return parser.Parse()
 
 	case myfilterToken:
 		return filter.NewMyCommand(args)
@@ -68,17 +70,4 @@ func (p *Parser) createSubCommand(token string) subcommand.SubCommand {
 
 		return subcommand.NewHelpCommand(options)
 	}
-}
-
-func (p *Parser) parseBoardSubCommannd() subcommand.SubCommand {
-	args := p.tokenizer.RestOfTokens()
-	if len(args) == 0 {
-		// 'board', ... => show board list
-		return board.NewCommand(args)
-	}
-
-	// 'board', token, ...
-	parser := NewBoardCommandParser(p.tokenizer)
-
-	return parser.Parse()
 }

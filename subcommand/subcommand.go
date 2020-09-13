@@ -27,6 +27,16 @@ func (cmd BaseCommand) HasQuery() bool {
 	return len(cmd.Args) > 0
 }
 
+func (cmd BaseCommand) HasQueryWithOffset(offset int) bool {
+	return len(cmd.Args[offset:]) > 0
+}
+
 func (cmd BaseCommand) Query() string {
 	return strings.Join(cmd.Args, " ")
+}
+
+func (cmd BaseCommand) QueryWithOffset(offset int) string {
+	rests := cmd.Args[offset:]
+
+	return strings.Join(rests, " ")
 }

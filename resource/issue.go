@@ -1,6 +1,7 @@
 package resource
 
 import (
+	"fmt"
 	"strings"
 
 	"github.com/andygrunwald/go-jira"
@@ -23,8 +24,7 @@ func args2jql(args []string) string {
 	return strings.Join(args, " AND ")
 }
 
-func (r *IssueResource) SearchIssues(args []string) ([]jira.Issue, error) {
-	jql := args2jql(args)
+func (r *IssueResource) SearchByJQL(jql string) ([]jira.Issue, error) {
 	store := cache.NewIssuesCache(r.wf)
 
 	issues, err := store.GetCacheByJQL(jql)
@@ -51,4 +51,16 @@ func (r *IssueResource) SearchIssues(args []string) ([]jira.Issue, error) {
 	}
 
 	return store.StoreByJQL(jql, issues)
+}
+
+func (r *IssueResource) SearchIssues(args []string) ([]jira.Issue, error) {
+	jql := args2jql(args)
+
+	return r.SearchByJQL(jql)
+}
+
+func (r *IssueResource) ListByProjectID(prjID string) ([]jira.Issue, error) {
+	jql := fmt.Sprintf("project = %s ORDER BY created desc, priority desc", prjID)
+
+	return r.SearchByJQL(jql)
 }
