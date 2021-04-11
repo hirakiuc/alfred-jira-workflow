@@ -1,0 +1,21 @@
+name: golangci-lint
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: golangci-lint
+        uses: golangci/golangci-lint-action@v2
+        with:
+          # Optional: version of golangci-lint
+          version: v1.39
+
+          # Optional: golangci-lint command line arguments.
+          args: ./...
