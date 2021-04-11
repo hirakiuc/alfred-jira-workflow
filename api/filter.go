@@ -1,15 +1,17 @@
 package api
 
 import (
+	"context"
+
 	"github.com/andygrunwald/go-jira"
 )
 
-func (client *Client) MyFilters() ([]jira.Filter, error) {
+func (client *Client) MyFilters(ctx context.Context) ([]jira.Filter, error) {
 	opts := jira.GetMyFiltersQueryOptions{
 		IncludeFavourites: true,
 	}
 
-	filters, _, err := client.jira.Filter.GetMyFilters(&opts)
+	filters, _, err := client.jira.Filter.GetMyFiltersWithContext(ctx, &opts)
 	if err != nil {
 		return []jira.Filter{}, err
 	}
@@ -22,13 +24,13 @@ func (client *Client) MyFilters() ([]jira.Filter, error) {
 	return items, nil
 }
 
-func (client *Client) SearchFilters() ([]jira.FiltersListItem, error) {
+func (client *Client) SearchFilters(ctx context.Context) ([]jira.FiltersListItem, error) {
 	opts := jira.FilterSearchOptions{}
 
 	items := []jira.FiltersListItem{}
 
 	for {
-		list, _, err := client.jira.Filter.Search(&opts)
+		list, _, err := client.jira.Filter.SearchWithContext(ctx, &opts)
 		if err != nil {
 			return items, err
 		}
@@ -44,8 +46,8 @@ func (client *Client) SearchFilters() ([]jira.FiltersListItem, error) {
 	}
 }
 
-func (client *Client) GetFilterByID(filterID int) (*jira.Filter, error) {
-	filter, _, err := client.jira.Filter.Get(filterID)
+func (client *Client) GetFilterByID(ctx context.Context, filterID int) (*jira.Filter, error) {
+	filter, _, err := client.jira.Filter.GetWithContext(ctx, filterID)
 	if err != nil {
 		return nil, err
 	}

@@ -60,10 +60,10 @@ func (cmd MyCommand) showMyFilters(ctx context.Context, wf *aw.Workflow, opts []
 	wf.WarnEmpty("No filters found.", "")
 }
 
-func (cmd MyCommand) showFilteredIssues(_ context.Context, wf *aw.Workflow, filter *jira.Filter, opts []string) {
+func (cmd MyCommand) showFilteredIssues(ctx context.Context, wf *aw.Workflow, filter *jira.Filter, opts []string) {
 	r := resource.NewIssueResource(wf)
 
-	issues, err := r.SearchIssues([]string{filter.Jql})
+	issues, err := r.SearchIssues(ctx, []string{filter.Jql})
 	if err != nil {
 		wf.FatalError(err)
 
@@ -119,7 +119,7 @@ func (cmd MyCommand) Run(ctx context.Context, wf *aw.Workflow) {
 
 	r := resource.NewFilterResource(wf)
 
-	filter, err := r.GetFilterByID(filterID)
+	filter, err := r.GetFilterByID(ctx, filterID)
 	if err != nil || filter == nil {
 		// case:my-filter [word]... No such filter found
 		cmd.showMyFilters(ctx, wf, cmd.Args)

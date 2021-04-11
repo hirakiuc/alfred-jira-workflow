@@ -40,7 +40,7 @@ func splitArgs(args []string) ([]string, string) {
 	}
 }
 
-func (cmd Command) Run(_ctx context.Context, wf *aw.Workflow) {
+func (cmd Command) Run(ctx context.Context, wf *aw.Workflow) {
 	r := resource.NewIssueResource(wf)
 
 	opts, word := splitArgs(cmd.Args)
@@ -48,7 +48,7 @@ func (cmd Command) Run(_ctx context.Context, wf *aw.Workflow) {
 		fmt.Fprintf(os.Stderr, "w:%s\n", w)
 	}
 
-	issues, err := r.SearchIssues(opts)
+	issues, err := r.SearchIssues(ctx, opts)
 	if err != nil {
 		wf.FatalError(err)
 

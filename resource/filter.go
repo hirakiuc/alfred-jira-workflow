@@ -18,7 +18,7 @@ func NewFilterResource(wf *aw.Workflow) *FilterResource {
 	}
 }
 
-func (r *FilterResource) MyFilters(_ context.Context) ([]jira.Filter, error) {
+func (r *FilterResource) MyFilters(ctx context.Context) ([]jira.Filter, error) {
 	store := cache.NewFiltersCache(r.wf)
 
 	filters, err := store.GetFiltersCache()
@@ -35,7 +35,7 @@ func (r *FilterResource) MyFilters(_ context.Context) ([]jira.Filter, error) {
 		return []jira.Filter{}, err
 	}
 
-	filters, err = client.MyFilters()
+	filters, err = client.MyFilters(ctx)
 	if err != nil {
 		return []jira.Filter{}, err
 	}
@@ -47,7 +47,7 @@ func (r *FilterResource) MyFilters(_ context.Context) ([]jira.Filter, error) {
 	return store.StoreFilters(filters)
 }
 
-func (r *FilterResource) GetFilterByID(filterID int) (*jira.Filter, error) {
+func (r *FilterResource) GetFilterByID(ctx context.Context, filterID int) (*jira.Filter, error) {
 	store := cache.NewFiltersCache(r.wf)
 
 	filter, err := store.GetFilterCache(filterID)
@@ -64,7 +64,7 @@ func (r *FilterResource) GetFilterByID(filterID int) (*jira.Filter, error) {
 		return nil, err
 	}
 
-	filter, err = client.GetFilterByID(filterID)
+	filter, err = client.GetFilterByID(ctx, filterID)
 	if err != nil {
 		return nil, err
 	}

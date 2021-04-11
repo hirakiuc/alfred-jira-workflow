@@ -62,7 +62,7 @@ func (r *ProjectResource) List(ctx context.Context) ([]model.ProjectData, error)
 		return []model.ProjectData{}, err
 	}
 
-	result, err := client.GetProjects()
+	result, err := client.GetProjects(ctx)
 	if err != nil {
 		return []model.ProjectData{}, err
 	}
