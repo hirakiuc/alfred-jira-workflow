@@ -1,15 +1,14 @@
 package api
 
 import (
-	"errors"
-	"fmt"
 	"os"
 	"strings"
 
 	"github.com/andygrunwald/go-jira"
+	"github.com/pkg/errors"
 )
 
-var errEnvVarRequired = errors.New("the Environment variable is required")
+var errEnvVarRequired = errors.New("Environment variable is required")
 
 type Client struct {
 	jira   *jira.Client
@@ -25,17 +24,17 @@ type Config struct {
 func loadConfig() (*Config, error) {
 	token := os.Getenv("JIRA_API_TOKEN")
 	if token == "" {
-		return nil, fmt.Errorf("%w: JIRA_API_TOKEN", errEnvVarRequired)
+		return nil, errors.Wrap(errEnvVarRequired, "JIRA_API_TOKEN")
 	}
 
 	baseURL := os.Getenv("JIRA_BASE_URL")
 	if baseURL == "" {
-		return nil, fmt.Errorf("%w: JIRA_BASE_URL", errEnvVarRequired)
+		return nil, errors.Wrap(errEnvVarRequired, "JIRA_BASE_URL")
 	}
 
 	email := os.Getenv("JIRA_EMAIL")
 	if email == "" {
-		return nil, fmt.Errorf("%w: JIRA_EMAIL", errEnvVarRequired)
+		return nil, errors.Wrap(errEnvVarRequired, "JIRA_EMAIL")
 	}
 
 	return &Config{

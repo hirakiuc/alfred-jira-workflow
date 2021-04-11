@@ -4,6 +4,7 @@ import (
 	"context"
 
 	aw "github.com/deanishe/awgo"
+
 	"github.com/hirakiuc/alfred-jira-workflow/cli"
 )
 

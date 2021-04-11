@@ -7,6 +7,7 @@ import (
 
 	"github.com/andygrunwald/go-jira"
 	aw "github.com/deanishe/awgo"
+
 	"github.com/hirakiuc/alfred-jira-workflow/decorator"
 	"github.com/hirakiuc/alfred-jira-workflow/resource"
 	"github.com/hirakiuc/alfred-jira-workflow/subcommand"

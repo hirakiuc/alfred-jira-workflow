@@ -4,6 +4,7 @@ import (
 	"context"
 
 	aw "github.com/deanishe/awgo"
+
 	"github.com/hirakiuc/alfred-jira-workflow/subcommand"
 )
 
@@ -21,7 +22,7 @@ func NewBacklogCommand(name string, args []string) BacklogCommand {
 	}
 }
 
-// nolint:wsl
+// nolint:wsl // not implemented yet
 func (cmd BacklogCommand) Run(_ctx context.Context, wf *aw.Workflow) {
 	/*
 		TBD

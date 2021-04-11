@@ -26,7 +26,7 @@ install:
 	go install
 
 check:
-	golangci-lint run --enable-all -D dupl ./...
+	golangci-lint run ./...
 
 clean:
 	go clean ./cmd/jira/main.go
