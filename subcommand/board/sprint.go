@@ -13,7 +13,7 @@ import (
 	"github.com/hirakiuc/alfred-jira-workflow/subcommand"
 )
 
-var errNotFound = errors.New("no such resource found")
+var errBoardNotFound = errors.New("board not found")
 
 type SprintCommand struct {
 	BoardName string
@@ -45,7 +45,7 @@ func (cmd SprintCommand) getBoard(ctx context.Context, wf *aw.Workflow) (*jira.B
 	}
 
 	if board == nil {
-		return nil, errors.Errorf("%w: board", errNotFound)
+		return nil, errBoardNotFound
 	}
 
 	return board, nil
