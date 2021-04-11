@@ -20,7 +20,7 @@ func NewBoardResource(wf *aw.Workflow) *BoardResource {
 	}
 }
 
-func (r *BoardResource) GetAll(_ context.Context, projectKeyOrID string, name string) ([]jira.Board, error) {
+func (r *BoardResource) GetAll(ctx context.Context, projectKeyOrID string, name string) ([]jira.Board, error) {
 	store := cache.NewBoardsCache(r.wf)
 
 	boards, err := store.GetCache()
@@ -37,7 +37,7 @@ func (r *BoardResource) GetAll(_ context.Context, projectKeyOrID string, name st
 		return []jira.Board{}, err
 	}
 
-	boards, err = client.GetAllBoards(projectKeyOrID, name)
+	boards, err = client.GetAllBoards(ctx, projectKeyOrID, name)
 	if err != nil {
 		return []jira.Board{}, err
 	}
@@ -49,13 +49,13 @@ func (r *BoardResource) GetAll(_ context.Context, projectKeyOrID string, name st
 	return store.Store(boards)
 }
 
-func (r *BoardResource) GetByID(_ context.Context, boardID int) (*jira.Board, error) {
+func (r *BoardResource) GetByID(ctx context.Context, boardID int) (*jira.Board, error) {
 	client, err := api.NewClient()
 	if err != nil {
 		return nil, err
 	}
 
-	board, err := client.GetBoardByID(boardID)
+	board, err := client.GetBoardByID(ctx, boardID)
 	if err != nil {
 		return nil, err
 	}

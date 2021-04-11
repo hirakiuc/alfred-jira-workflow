@@ -31,7 +31,7 @@ func (cmd IssueCommand) Run(ctx context.Context, wf *aw.Workflow) {
 	word := strings.Join(cmd.Args, " ")
 
 	// Fetch issues
-	issues, err := r.ListByProjectID(cmd.prjID)
+	issues, err := r.ListByProjectID(ctx, cmd.prjID)
 	if err != nil {
 		wf.FatalError(err)
 

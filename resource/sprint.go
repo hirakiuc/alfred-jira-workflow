@@ -20,7 +20,7 @@ func NewSprintResource(wf *aw.Workflow) *SprintResource {
 	}
 }
 
-func (r *SprintResource) GetAllByBoardID(_ context.Context, boardID int) ([]jira.Sprint, error) {
+func (r *SprintResource) GetAllByBoardID(ctx context.Context, boardID int) ([]jira.Sprint, error) {
 	store := cache.NewSprintsCache(r.wf)
 
 	sprints, err := store.GetCache(boardID)
@@ -37,7 +37,7 @@ func (r *SprintResource) GetAllByBoardID(_ context.Context, boardID int) ([]jira
 		return []jira.Sprint{}, err
 	}
 
-	sprints, err = client.GetSprintsInBoard(boardID)
+	sprints, err = client.GetSprintsInBoard(ctx, boardID)
 	if err != nil {
 		return []jira.Sprint{}, err
 	}

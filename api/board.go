@@ -1,12 +1,13 @@
 package api
 
 import (
+	"context"
 	"strings"
 
 	"github.com/andygrunwald/go-jira"
 )
 
-func (client *Client) GetAllBoards(projectKeyOrID string, word string) ([]jira.Board, error) {
+func (client *Client) GetAllBoards(ctx context.Context, projectKeyOrID string, word string) ([]jira.Board, error) {
 	opts := jira.BoardListOptions{
 		BoardType:      "scrum",
 		Name:           word,
@@ -16,7 +17,7 @@ func (client *Client) GetAllBoards(projectKeyOrID string, word string) ([]jira.B
 	boards := []jira.Board{}
 
 	for {
-		list, _, err := client.jira.Board.GetAllBoards(&opts)
+		list, _, err := client.jira.Board.GetAllBoardsWithContext(ctx, &opts)
 		if err != nil {
 			return boards, err
 		}
@@ -32,8 +33,8 @@ func (client *Client) GetAllBoards(projectKeyOrID string, word string) ([]jira.B
 	}
 }
 
-func (client *Client) GetBoardByName(name string) (*jira.Board, error) {
-	boards, err := client.GetAllBoards("", name)
+func (client *Client) GetBoardByName(ctx context.Context, name string) (*jira.Board, error) {
+	boards, err := client.GetAllBoards(ctx, "", name)
 	if err != nil {
 		return nil, err
 	}
@@ -48,8 +49,8 @@ func (client *Client) GetBoardByName(name string) (*jira.Board, error) {
 	return nil, nil
 }
 
-func (client *Client) GetBoardByID(boardID int) (*jira.Board, error) {
-	board, _, err := client.jira.Board.GetBoard(boardID)
+func (client *Client) GetBoardByID(ctx context.Context, boardID int) (*jira.Board, error) {
+	board, _, err := client.jira.Board.GetBoardWithContext(ctx, boardID)
 	if err != nil {
 		return nil, err
 	}
