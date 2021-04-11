@@ -2,6 +2,7 @@ package cache
 
 import (
 	aw "github.com/deanishe/awgo"
+
 	"github.com/hirakiuc/alfred-jira-workflow/model"
 )
 

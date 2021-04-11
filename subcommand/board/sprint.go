@@ -2,12 +2,12 @@ package board
 
 import (
 	"context"
-	"errors"
-	"fmt"
 	"strconv"
 
 	"github.com/andygrunwald/go-jira"
 	aw "github.com/deanishe/awgo"
+	"github.com/pkg/errors"
+
 	"github.com/hirakiuc/alfred-jira-workflow/decorator"
 	"github.com/hirakiuc/alfred-jira-workflow/resource"
 	"github.com/hirakiuc/alfred-jira-workflow/subcommand"
@@ -45,7 +45,7 @@ func (cmd SprintCommand) getBoard(ctx context.Context, wf *aw.Workflow) (*jira.B
 	}
 
 	if board == nil {
-		return nil, fmt.Errorf("%w: board", errNotFound)
+		return nil, errors.Errorf("%w: board", errNotFound)
 	}
 
 	return board, nil

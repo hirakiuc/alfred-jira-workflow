@@ -6,6 +6,7 @@ import (
 	"strings"
 
 	aw "github.com/deanishe/awgo"
+
 	"github.com/hirakiuc/alfred-jira-workflow/decorator"
 	"github.com/hirakiuc/alfred-jira-workflow/model"
 	"github.com/hirakiuc/alfred-jira-workflow/resource"
