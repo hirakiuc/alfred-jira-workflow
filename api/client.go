@@ -1,7 +1,6 @@
 package api
 
 import (
-	"errors"
 	"os"
 	"strings"
 
